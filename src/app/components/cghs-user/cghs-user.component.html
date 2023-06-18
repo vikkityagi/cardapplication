@@ -1,0 +1,315 @@
+<form
+  class="my-form"
+  [formGroup]="cghsUserForm"
+  (ngSubmit)="onSubmit()"
+  enctype="multipart/form-data"
+>
+  <mat-card-content class="mat-card-content">
+    <mat-accordion multi>
+      <mat-expansion-panel [disabled]="false" [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-description class="mat-toolbar">
+            <span class="mat-span">CGHS USER</span>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <div class="row">
+          <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-4">
+            <mat-form-field appearance="outline">
+              <mat-label>Name</mat-label>
+              <input
+                matInput
+                type="text"
+                formControlName="name"
+                class="form-control"
+                placeholder=""
+                autocomplete="off"
+                required
+              />
+              <mat-error
+                class="text-danger"
+                *ngIf="
+                  cghsUserForm.get('name').touched &&
+                  cghsUserForm.get('name').errors?.required
+                "
+              >
+                <strong>Required field</strong>
+              </mat-error>
+              <mat-error
+                class="text-danger"
+                *ngIf="!cghsUserForm.get('name').valid"
+              >
+                <strong>{{cghsUserForm.get("name").getError("serverError")}}</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-4">
+            <mat-form-field appearance="outline">
+              <mat-label>Designation<span style="color: red"></span></mat-label>
+              <input
+                matInput
+                type="text"
+                formControlName="designation"
+                class="form-control"
+                placeholder=""
+                autocomplete="off"
+                required
+              />
+              <mat-error
+                class="text-danger"
+                *ngIf="
+                  cghsUserForm.get('designation').touched &&
+                  cghsUserForm.get('designation').errors?.required
+                "
+              >
+                <strong>Required field</strong>
+              </mat-error>
+              <mat-error
+                class="text-danger"
+                *ngIf="!cghsUserForm.get('designation').valid"
+              >
+                <strong>{{cghsUserForm.get("designation").getError("serverError")}}</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-4">
+            <mat-form-field appearance="outline">
+              <mat-label>Email</mat-label>
+              <input
+                matInput
+                type="email"
+                formControlName="email"
+                class="form-control"
+                placeholder=""
+                autocomplete="off"
+                required
+              />
+              <mat-error
+                class="text-danger"
+                *ngIf="
+                  cghsUserForm.get('email').touched &&
+                  cghsUserForm.get('email').errors?.required
+                "
+              >
+                <strong>Required field</strong>
+              </mat-error>
+              <mat-error
+                class="text-danger"
+                *ngIf="!cghsUserForm.get('email').valid"
+              >
+                <strong>{{cghsUserForm.get("email").getError("serverError")}}</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-4">
+            <mat-form-field appearance="outline">
+              <mat-label>mobile</mat-label>
+              <input
+                matInput
+                type="text"
+                formControlName="mobile"
+                class="form-control"
+                placeholder=""
+                autocomplete="off"
+                minlength="12"
+                maxlength="13"
+                required
+              />
+              <mat-error
+                class="text-danger"
+                *ngIf="
+                  cghsUserForm.get('mobile').touched &&
+                  cghsUserForm.get('mobile').errors?.required
+                "
+              >
+                <strong>Required field</strong>
+              </mat-error>
+              <mat-error
+                class="text-danger"
+                *ngIf="!cghsUserForm.get('mobile').valid"
+              >
+                <strong>{{cghsUserForm.get("mobile").getError("serverError")}}</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Ministry</mat-label>
+              <mat-select
+                placeholder="--Select--"
+                formControlName="ministry"
+                (selectionChange)="getdepartment($event.value)"
+              >
+                <mat-option
+                  value="{{ ministry.ministryCode }}"
+                  *ngFor="let ministry of ministryList"
+                  >{{ ministry.ministryName }}</mat-option
+                >
+              </mat-select>
+              <mat-error
+                class="text-danger"
+                *ngIf="
+                  cghsUserForm.get('ministry').touched &&
+                  cghsUserForm.get('ministry').errors?.required
+                "
+              >
+                <strong>Required field</strong>
+              </mat-error>
+              <ng-content></ng-content>
+            </mat-form-field>
+          </div>
+          <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Department</mat-label>
+
+              <mat-select
+                placeholder="--Select--"
+                formControlName="department"
+                (selectionChange)="getorganization($event.value)"
+              >
+                <mat-option
+                  value="{{ department.departmentCode }}"
+                  *ngFor="let department of departmentList"
+                  >{{ department.departmentName }}</mat-option
+                >
+              </mat-select>
+
+              <mat-error
+                class="text-danger"
+                *ngIf="
+                  cghsUserForm.get('department').touched &&
+                  cghsUserForm.get('department').errors?.required
+                "
+              >
+                <strong>Required field</strong>
+              </mat-error>
+              <ng-content></ng-content>
+            </mat-form-field>
+          </div>
+
+          <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Organization</mat-label>
+              <mat-select
+                placeholder="--Select--"
+                formControlName="organization"
+                (selectionChange)="getOffices($event)"
+              >
+                <mat-option
+                  value="{{ org.organizationCode }}"
+                  *ngFor="let org of orgList"
+                  >{{ org.organizationName }}</mat-option
+                >
+              </mat-select>
+              <mat-error
+                class="text-danger"
+                *ngIf="
+                  cghsUserForm.get('organization').touched &&
+                  cghsUserForm.get('organization').errors?.required
+                "
+              >
+                <strong>Required field</strong>
+              </mat-error>
+              <ng-content></ng-content>
+            </mat-form-field>
+          </div>
+
+          <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Office Name</mat-label>
+              <mat-select
+                placeholder="--Select--"
+                formControlName="organizationOfficeId"
+              >
+                <mat-option
+                  value="{{ office.id }}"
+                  *ngFor="let office of officeList"
+                  >{{ office.officeName }}</mat-option
+                >
+              </mat-select>
+              <mat-error
+                class="text-danger"
+                *ngIf="
+                  cghsUserForm.get('organizationOfficeId').touched &&
+                  cghsUserForm.get('organizationOfficeId').errors?.required
+                "
+              >
+                <strong>Required field</strong>
+              </mat-error>
+              <ng-content></ng-content>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-6">
+            <mat-form-field appearance="outline">
+              <mat-label> Select CGHS City </mat-label>
+
+              <mat-select
+                placeholder="--Select--"
+                formControlName="cghscity"
+                multiple
+              >
+                <mat-option
+                  value="{{ cghscity.id }}"
+                  *ngFor="let cghscity of cghscitylist"
+                  disabled
+                  >{{ cghscity.cityName }}</mat-option
+                >
+              </mat-select>
+              <mat-error
+                class="text-danger"
+                *ngIf="
+                  cghsUserForm.get('cghscity').touched &&
+                  cghsUserForm.get('cghscity').errors?.required
+                "
+              >
+                <strong>Required field</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row mt-3 mb-4 px-2">
+          <div class="col-12 text-center px-2">
+            <button type="submit" mat-btn class="btn btn-primary mr-2">
+              Add Profile</button
+            >&nbsp;&nbsp;
+            <button type="reset" mat-btn class="btn btn-primary mr-2">
+              Reset
+            </button>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-card-content>
+</form>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">name</th>
+      <th scope="col">Designation</th>
+      <th scope="col">Email</th>
+      <th scope="col">Mobile Number</th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let user of userList">
+    <tr>
+      <th scope="row">{{ user.name }}</th>
+      <td>{{ user.designation }}</td>
+      <td>{{ user.email }}</td>
+      <td>{{ user.mobile }}</td>
+      <td><mat-icon>edit</mat-icon></td>
+      <span>|</span>
+      <td><mat-icon>delete</mat-icon></td>
+    </tr>
+  </tbody>
+</table>

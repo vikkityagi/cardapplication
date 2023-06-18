@@ -1,0 +1,133 @@
+<!-- <mat-drawer-container class="example-container">
+  <mat-drawer #drawer
+    >C.G.H.S<pre></pre>
+
+      Add
+
+  </mat-drawer>
+  <mat-drawer-content>
+        <button mat-raised-button (click)="drawer.toggle()" prefixIcon="e-icon e-bullets"></button>
+  </mat-drawer-content>
+</mat-drawer-container> -->
+
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer #drawer class="example-sidenav" mode="side" opened="true">
+    <div><img class="user-profile" src="../assets/images/CGHS-Logo.png" /></div>
+    <!-- <div class="user-profile" style="background: url('../assets/images/CGHS-Logo.png') no-repeat;"></div> -->
+
+    <app-navigation
+      [navData]="navData"
+      (userVerifiedEvent)="getNav(roleId)"
+    ></app-navigation>
+  </mat-drawer>
+  <mat-toolbar>
+    <button
+      mat-icon-button
+      class="example-icon"
+      aria-label="Example icon-button with menu icon"
+      (click)="drawer.toggle()"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
+    <div class="mat-toolbar-title"></div>
+    <span class="example-spacer"></span>
+    <a routerLink="/"
+      ><button
+        mat-icon-button
+        class="btn btn-danger"
+        aria-label="Example icon-button with heart icon"
+      >
+        Register
+      </button></a
+    >
+    &nbsp;&nbsp;
+    <a routerLink="/login"
+      ><button
+        mat-icon-button
+        class="btn btn-danger"
+        aria-label="Example icon-button with heart icon"
+      >
+        Login
+      </button></a
+    >
+    &nbsp;&nbsp;
+    <a routerLink="/profile"
+      ><button
+        mat-icon-button
+        class="btn btn-danger"
+        aria-label="Example icon-button with heart icon"
+      >
+        My Profile
+      </button></a
+    >
+    &nbsp;&nbsp;
+    <a routerLink="/logout"
+      ><button
+        mat-icon-button
+        class="btn btn-danger"
+        aria-label="Example icon-button with heart icon"
+      >
+        Home
+      </button></a
+    >
+    &nbsp;&nbsp;
+    <a routerLink="/logout"
+      ><button
+        mat-icon-button
+        class="btn btn-danger"
+        aria-label="Example icon-button with heart icon"
+      >
+        Logout
+      </button></a
+    >
+    &nbsp;&nbsp;
+    <button mat-button class="btn btn-danger" [matMenuTriggerFor]="menu">
+      {{ selectedItem }}
+    </button>
+    <mat-menu #menu="matMenu">
+      <button
+        mat-menu-item
+        *ngFor="let role of roleData"
+        (click)="getNav(role.id)"
+        value="role.id"
+      >
+        {{ role.roleName }}
+      </button>
+    </mat-menu>
+  </mat-toolbar>
+  
+  <router-outlet></router-outlet>
+</mat-drawer-container>
+
+<footer class="text-center text-white" style="background-color: #caced1">
+  <!-- Grid container -->
+  <div class="container p-3">
+    <!-- Section: Images -->
+    <section class="">
+      <div class="row" style="margin-left: -226px">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-4" style="text-align: left">
+          <img src="../assets/images/niclogo.png" class="w-50" />
+        </div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-4" style="margin-top: 31px;">
+          <h3>
+            Designed, Developed and Hosted by National Informatics Centre (NIC)
+          </h3>
+        </div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-4" style="margin-top: 31px; text-align: right">
+          <b><h3>
+            CGHS
+          </h3></b>
+        </div>
+      </div>
+    </section>
+    <!-- Section: Images -->
+  </div>
+  <!-- Grid container -->
+
+  <!-- Copyright -->
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+    © 2023 Copyright:
+    <a class="text-white" href="https://cghs.nic.in/">C.G.H.S</a>
+  </div>
+  <!-- Copyright -->
+</footer>

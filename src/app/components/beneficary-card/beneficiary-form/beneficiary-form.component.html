@@ -1,0 +1,545 @@
+<form class="my-form" [formGroup]="beneficaryform" (ngSubmit)="onSubmitBeneficiary()" (onLoad)="loadFormData()"
+  enctype="multipart/form-data">
+  <div class="alert alert-success" *ngIf="isSuccess" role="alert">
+    {{this.successMessage}}
+  </div>
+  <div class="alert alert-danger" *ngIf="isFail" role="alert">
+    {{this.failureMessage}}
+  </div>
+
+  <mat-card-content class="mat-card-content">
+    <mat-accordion multi>
+      <mat-expansion-panel [disabled]="true" [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-description class="mat-toolbar">
+            <span class="mat-span">Applicant Detail</span>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <!-- <div class="row" *ngIf="kycimage">
+              <img src='data:image/png;base64,{{abhaData.kycPhoto}}'  class="img-control" width="20px" height="160px"/>
+            </div> -->
+        <div class="row">
+          <form [formGroup]="abhaform" (ngSubmit)="onSubmitAbhaid()">
+            <div class="row" *ngIf="verifyabha">
+              <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-5">
+                <mat-form-field appearance="outline">
+                  <mat-label>Enter Abha-Id</mat-label>
+                  <input matInput type="text" [textMask]="{mask: abhaInput}" formControlName="abhaid"
+                    class="form-control" placeholder="" autocomplete="off" required />
+                  <mat-error class="text-danger" *ngIf="
+                                abhaform.get('abhaid').touched &&
+                                abhaform.get('abhaid').errors?.required
+                              "> <strong>Required field</strong></mat-error>
+
+                  <mat-error *ngIf="abhaform.controls.abhaid.errors?.invalidAbhaId">Invalid Abha Id</mat-error>
+
+
+                </mat-form-field>
+              </div>
+              <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-5" *ngIf="verifyabha">
+                <button mat-button type="submit" class="btn btn-primary">
+                  <mat-icon>search</mat-icon>
+                </button>
+              </div>
+            </div>
+
+          </form>
+          <form [formGroup]="otpform" (ngSubmit)="onSubmitOtp()">
+            <div class="row" *ngIf="verifyotp">
+              <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-5">
+                <mat-form-field appearance="outline">
+                  <mat-label>Your Abhad-Id</mat-label>
+                  <input matInput type="text" formControlName="abhaid2" class="form-control" placeholder=""
+                    autocomplete="off" required />
+                  <mat-error class="text-danger" *ngIf="
+                            otpform.get('abhaid2').touched &&
+                            otpform.get('abhaid2').errors?.required
+                          ">
+                    <strong>Required field</strong>
+                  </mat-error>
+
+                </mat-form-field>
+              </div>
+              <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-5" *ngIf="otp">
+                <mat-form-field appearance="outline">
+                  <mat-label>Verify Otp</mat-label>
+                  <input matInput type="text" (keypress)="numberOnly($event)" formControlName="otp" class="form-control"
+                    placeholder="" autocomplete="off" required />
+                  <mat-error class="text-danger" *ngIf="
+                                otpform.get('otp').touched &&
+                                otpform.get('otp').errors?.required
+                              ">
+                    <strong>Required field</strong>
+                  </mat-error>
+                  <mat-error *ngIf="otpform.controls.otp.errors?.invalidOTP">Invalid OTP</mat-error>
+
+                </mat-form-field>
+              </div>
+              <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-2" *ngIf="verify">
+                <button mat-button type="submit" class="btn btn-success">Verify</button>
+              </div>
+            </div>
+
+          </form>
+
+        </div>
+
+        <!-- <div class="row">
+          <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Parichay</mat-label>
+              <input matInput type="text"  class="form-control" placeholder="" autocomplete="off" formControlName="parichay" required />
+              <mat-error class="text-danger" *ngIf="
+                    beneficaryform.get('parichay').touched &&
+                    beneficaryform.get('parichay').errors?.required">
+                <strong>Required field</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+        </div> -->
+        <div class="row">
+          <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Card Holder Name <span style="color: red">(English)</span></mat-label>
+              <input matInput type="text" class="form-control" placeholder="" autocomplete="off"
+                formControlName="englishname" required />
+              <mat-error class="text-danger" *ngIf="
+                    beneficaryform.get('englishname').touched &&
+                    beneficaryform.get('englishname').errors?.required">
+                <strong>Required field</strong>
+              </mat-error>
+              <mat-error class="text-danger" *ngIf="abhaidValidation">
+                <strong>{{message}}</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Card Holder Name <span style="color: red">(Hindi)</span></mat-label>
+              <input matInput type="text" class="form-control" placeholder="" autocomplete="off"
+                formControlName="hindiname" required />
+              <mat-error class="text-danger" *ngIf="
+                    beneficaryform.get('hindiname').touched &&
+                    beneficaryform.get('hindiname').errors?.required">
+                <strong>Required field</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Card type</mat-label>
+              <mat-select placeholder="--Select--" formControlName="cardTypeCode">
+                <mat-option value="{{card.id}}" *ngFor="let card of cardTypeResponse">{{card.cardType}}</mat-option>
+              </mat-select>
+              <mat-error class="text-danger" *ngIf="
+                    beneficaryform.get('cardTypeCode').touched &&
+                    beneficaryform.get('cardTypeCode').errors?.required">
+                <strong>Required field</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-3">
+            <mat-radio-group aria-label="Select an option" formControlName="gender">
+              <div> Gender</div>
+              <mat-radio-button value="M">Male</mat-radio-button>
+              <mat-radio-button value="F">Female</mat-radio-button>
+              <mat-radio-button value="O">Other</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div><!--row end-->
+
+        <div class="row"><!--start -->
+          <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Date Of Birth</mat-label>
+              <input matInput formControlName="dob" placeholder="mm/dd/yyyy" [matDatepicker]="picker"
+                ng-model-options="{timezone: 'utc'}" />
+              <mat-datepicker-toggle matIconPrefix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+              <mat-error class="text-danger" *ngIf="
+                    beneficaryform.get('dob').touched &&
+                    beneficaryform.get('dob').errors?.required">
+                <strong>Required field</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-3">
+            <mat-form-field appearance="outline">
+              <mat-label>To AD of City</mat-label>
+              <mat-select placeholder="--select--" formControlName="cghsCity">
+                <mat-option value="{{city.id}}" *ngFor="let city of cghsCities">{{city.cityName}}</mat-option>
+              </mat-select>
+              <mat-error class="text-danger" *ngIf="
+                    beneficaryform.get('cghsCity').touched &&
+                    beneficaryform.get('cghsCity').errors?.required">
+                <strong>Required field</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Ministry</mat-label>
+              <mat-select placeholder="--Select--" formControlName="ministry"
+                (selectionChange)="getdepartment($event.value)">
+                <mat-option value="{{ministry.ministryCode}}"
+                  *ngFor="let ministry of ministryList">{{ministry.ministryName}}</mat-option>
+              </mat-select>
+              <mat-error class="text-danger" *ngIf="
+                    beneficaryform.get('ministry').touched &&
+                    beneficaryform.get('ministry').errors?.required">
+                <strong>Required field</strong>
+              </mat-error>
+              <ng-content></ng-content>
+            </mat-form-field>
+          </div>
+          <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Department</mat-label>
+
+              <mat-select placeholder="--Select--" formControlName="department"
+                (selectionChange)="getorganization($event.value)">
+                <mat-option value="{{department.departmentCode}}"
+                  *ngFor="let department of departmentList">{{department.departmentName}}</mat-option>
+              </mat-select>
+
+              <mat-error class="text-danger" *ngIf="
+                    beneficaryform.get('department').touched &&
+                    beneficaryform.get('department').errors?.required">
+                <strong>Required field</strong>
+
+              </mat-error>
+              <ng-content></ng-content>
+            </mat-form-field>
+          </div>
+
+          <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Organization</mat-label>
+              <mat-select placeholder="--Select--" formControlName="organization" (selectionChange)="getOffices($event);">
+                <mat-option value={{org.organizationCode}}
+                  *ngFor="let org of orgList">{{org.organizationName}}</mat-option>
+              </mat-select>
+              <mat-error class="text-danger" *ngIf="
+                      beneficaryform.get('organization').touched &&
+                      beneficaryform.get('organization').errors?.required">
+                <strong>Required field</strong>
+              </mat-error>
+              <ng-content></ng-content>
+            </mat-form-field>
+          </div>
+        </div><!--end -->
+        <div class="row"><!-- start -->
+          <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Pay Scale</mat-label>
+              <mat-select placeholder="--select--" formControlName="payScaleCode" >
+                <mat-option value={{lis.id}} *ngFor="let lis of payscalelist">{{lis.payscale}}</mat-option>
+              </mat-select>
+              <mat-error class="text-danger" *ngIf="
+                    beneficaryform.get('payScaleCode').touched &&
+                    beneficaryform.get('payScaleCode').errors?.required">
+                <strong>Required field</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <!-- <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Present Pay Level</mat-label>
+              <mat-select placeholder="--select--" formControlName="presentPay">
+
+                <mat-option value="level-1">Level-1</mat-option>
+              </mat-select>
+              <mat-error class="text-danger" *ngIf="
+                    beneficaryform.get('presentpaylevel').touched &&
+                    beneficaryform.get('presentpaylevel').errors?.required">
+                <strong>Required field</strong>
+              </mat-error>
+            </mat-form-field>
+          </div> -->
+          <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Present Pay (For Service)</mat-label>
+              <input matInput type="text" class="form-control" placeholder="" autocomplete="off"
+                formControlName="presentPay" required />
+              <mat-error class="text-danger" *ngIf="
+                    beneficaryform.get('presentPay').touched &&
+                    beneficaryform.get('presentPay').errors?.required">
+                <strong>Required field</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Ward Entitilement</mat-label>
+              <mat-select placeholder="--select--" formControlName="wardentitlement">
+
+                <mat-option value="{{entitlement.id}}" *ngFor="let entitlement of WardEntitlementResponse">{{entitlement.wardEntitlement}}</mat-option>
+
+              </mat-select>
+              <mat-error class="text-danger" *ngIf="
+                    beneficaryform.get('wardentitlement').touched &&
+                    beneficaryform.get('wardentitlement').errors?.required">
+                <strong>Required field</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Date of Joining in service </mat-label>
+              <input matInput placeholder="mm/dd/yyyy" [matDatepicker]="picker1" formControlName="dateOfJoining" />
+              <mat-datepicker-toggle matIconPrefix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+              <mat-error class="text-danger" *ngIf="
+                    beneficaryform.get('dateOfJoining').touched &&
+                    beneficaryform.get('dateOfJoining').errors?.required">
+                <strong>Required field</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-3">
+
+
+            <mat-form-field appearance="outline">
+              <mat-label>Date Of Retirement</mat-label>
+              <input matInput placeholder="mm/dd/yyyy" [matDatepicker]="picker2"
+                formControlName="dateOfSuperannuation" />
+              <mat-datepicker-toggle matIconPrefix [for]="picker2"></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+              <mat-error class="text-danger" *ngIf="
+                    beneficaryform.get('dateOfSuperannuation').touched &&
+                    beneficaryform.get('dateOfSuperannuation').errors?.required">
+                <strong>Required field</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+
+
+        </div><!-- end -->
+
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-card-content>
+
+
+  <mat-card-content class="mat-card-content">
+    <mat-accordion multi>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-description class="mat-toolbar">
+            <span class="mat-span">Office Address</span>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <div class="row"><!-- start -->
+          <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Office Name</mat-label>
+              <mat-select placeholder="--Select--" formControlName="organizationOfficeId">
+                <mat-option value={{office.id}} *ngFor="let office of officeList">{{office.officeName}}</mat-option>
+              </mat-select>
+              <mat-error class="text-danger" *ngIf="
+              beneficaryform.get('organizationOfficeId').touched &&
+              beneficaryform.get('organizationOfficeId').errors?.required
+                    ">
+                <strong>Required field</strong>
+              </mat-error>
+              <mat-error
+                class="text-danger"
+                *ngIf="!beneficaryform.get('organizationOfficeId').valid"
+              >
+                <strong>{{ beneficaryform.get('organizationOfficeId').getError('serverError') }}</strong>
+              </mat-error>
+              <ng-content></ng-content>
+            </mat-form-field>
+          </div>
+          <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Address</mat-label>
+              <input matInput type="text" class="form-control" placeholder="" autocomplete="off"
+                formControlName="officeaddress" required />
+              <mat-error class="text-danger" *ngIf="
+                      beneficaryform.get('officeaddress').touched &&
+                      beneficaryform.get('officeaddress').errors?.required">
+                <strong>Required field</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Phone Number</mat-label>
+              <input matInput type="text" formControlName="officephoneno" class="form-control" placeholder=""
+                autocomplete="off" required />
+              <mat-error class="text-danger" *ngIf="
+                    beneficaryform.get('officephoneno').touched &&
+                    beneficaryform.get('officephoneno').errors?.required">
+                <strong>Required field</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div><!-- end -->
+        <div class="row"><!-- start -->
+          <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-4">
+            <mat-form-field appearance="outline">
+              <mat-label>Email Address</mat-label>
+              <input matInput type="text" formControlName="officeemail" class="form-control" placeholder=""
+                autocomplete="off" required />
+              <mat-error class="text-danger" *ngIf="
+                    beneficaryform.get('officeemail').touched &&
+                    beneficaryform.get('officeemail').errors?.required">
+                <strong>Required field</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-4">
+            <mat-form-field appearance="outline">
+              <mat-label>Pin Code</mat-label>
+              <input matInput type="text" class="form-control" placeholder="" autocomplete="off"
+                formControlName="officepincode" required />
+              <mat-error class="text-danger"
+                *ngIf="beneficaryform.get('officepincode').touched && beneficaryform.get('officepincode').errors?.required">
+                <strong>Required field</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div><!-- end -->
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-card-content>
+
+
+  <mat-card-content class="mat-card-content">
+    <mat-accordion multi>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-description class="mat-toolbar">
+            <span class="mat-span">Residential Address</span>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <div class="row"><!-- start -->
+          <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Address</mat-label>
+              <input matInput type="text" class="form-control" placeholder="" autocomplete="off"
+                formControlName="residentialaddress" required />
+              <mat-error class="text-danger" *ngIf="
+                    beneficaryform.get('residentialaddress').touched &&
+                    beneficaryform.get('residentialaddress').errors?.required">
+                <strong>Required field</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Place</mat-label>
+              <input matInput type="text" class="form-control" placeholder="" autocomplete="off"
+                formControlName="residentialplace" required />
+              <mat-error class="text-danger" *ngIf="
+                    beneficaryform.get('residentialplace').touched &&
+                    beneficaryform.get('residentialplace').errors?.required">
+                <strong>Required field</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-3">
+            <mat-form-field appearance="outline">
+              <mat-label>City</mat-label>
+              <input matInput type="text" class="form-control" placeholder="" autocomplete="off"
+                formControlName="residentialcity" required />
+              <mat-error class="text-danger" *ngIf="
+                    beneficaryform.get('residentialcity').touched &&
+                    beneficaryform.get('residentialcity').errors?.required">
+                <strong>Required field</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div><!-- end -->
+        <div class="row"><!-- start -->
+
+          <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-2">
+            <mat-form-field appearance="outline">
+              <mat-label>Pin Number</mat-label>
+              <input matInput type="text" class="form-control" placeholder="" autocomplete="off"
+                formControlName="residentialpincode" required />
+              <mat-error class="text-danger" *ngIf="
+                    beneficaryform.get('residentialpincode').touched &&
+                    beneficaryform.get('residentialpincode').errors?.required">
+                <strong>Required field</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Phone Number</mat-label>
+              <input matInput type="text" class="form-control" placeholder="" autocomplete="off"
+                formControlName="residentialphone" required />
+              <mat-error class="text-danger" *ngIf="
+                    beneficaryform.get('residentialphone').touched &&
+                    beneficaryform.get('residentialphone').errors?.required">
+                <strong>Required field</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Mobile Number</mat-label>
+              <input matInput type="text" class="form-control" placeholder="" autocomplete="off"
+                formControlName="residentialmobile" required />
+              <mat-error class="text-danger" *ngIf="
+                    beneficaryform.get('residentialmobile').touched &&
+                    beneficaryform.get('residentialmobile').errors?.required">
+                <strong>Required field</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          
+          <!-- <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-4">
+            <mat-form-field appearance="outline">
+              <mat-label>Personal email Of Applicant</mat-label>
+              <input matInput type="text" class="form-control" placeholder="" autocomplete="off"
+                formControlName="residentialemail" required />
+              <mat-error class="text-danger" *ngIf="
+                    beneficaryform.get('residentialemail').touched &&
+                    beneficaryform.get('residentialemail').errors?.required">
+                <strong>Required field</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>  -->
+
+
+        </div><!-- end -->
+        <div class="row"><!-- start -->
+
+
+        </div><!-- end -->
+        <div class="row"><!-- start -->
+          <mat-radio-group aria-label="Select an option" formControlName="centraldeputation">
+            <div> Are You on Deputation (Central Deputation)</div>
+            <mat-radio-button value="1">Yes</mat-radio-button>
+            <mat-radio-button value="2">No</mat-radio-button>
+          </mat-radio-group>
+
+        </div>
+
+       
+      </mat-expansion-panel>
+    </mat-accordion>
+    <div class="row mt-3 mb-4 px-2">
+      <div class="col-12 text-center px-2">
+        <div>
+        </div>
+        <button mat-button  class="btn btn-primary mr-2" *ngIf="this.applicationId != null "
+           [disabled]="!this.beneficaryform.valid">Update</button>
+        <button mat-button  class="btn btn-primary mr-2" *ngIf="this.applicationId == null "
+          [disabled]="benRegistrationData?.isFinal" [disabled]="!this.beneficaryform.valid">Save</button>&nbsp;
+        <button type="reset" mat-button class="btn btn-primary mr-2">Reset</button>&nbsp;
+
+        <button mat-button matStepperPrevious class="btn btn-primary mr-2">Back</button>&nbsp;
+
+      </div>
+    </div>
+  </mat-card-content>
+
+</form>

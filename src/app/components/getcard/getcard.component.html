@@ -1,0 +1,247 @@
+
+   <div class="container" >
+    <div class="card">
+        <div class="card-body">
+            <div style="color:white;border: 1px solid;
+            justify-content: center;
+            text-align: center;
+            background-color: #3232b7;
+            height: 32px;">
+                <h2 class="card-title">Nodal Officer Detail</h2>
+            </div>
+            <div class="row" style="padding-top: 15px">
+                <div class="table-responsive col-md-6">
+                    <table class="table table-striped">
+                        <thead>
+                        </thead>
+                        <tbody>
+                            <tr>
+                              <th class="col-md-1">Name</th>
+                              <td class="col-md-1">{{onboardingInfo.firstname}}</td>
+                            </tr>
+                              
+                            <tr>
+                              <th class="col-md-2">EmployeeId</th>
+                              <td class="col-md-1">{{onboardingInfo.employeeid}}</td>
+                            </tr>
+                            
+                            <tr>
+                              <th class="col-md-2">Date of superannuation</th>
+                              <td class="col-md-1">{{onboardingInfo.superannuation}}</td>
+                            </tr>
+                            
+                            <tr>
+                              <th class="col-md-2">Official Email Id</th>
+                              <td class="col-md-1">{{onboardingInfo.email}}</td>
+                            </tr>
+                            
+                            <tr>
+                              <th class="col-md-2">Mobile Number</th>
+                              <td class="col-md-1">{{onboardingInfo.phoneno2}}</td>
+                            </tr>
+                            <tr *ngIf="this.isDisabled3">
+                              <th class="col-md-2">Department</th>
+                              <td class="col-md-1">{{departmentname.departmentName}}</td>
+                            </tr>
+                            <tr>
+                              <th class="col-md-2">Office Name</th>
+                              <td class="col-md-1">{{onboardingInfo.organizationOfficeName}}</td>
+                            </tr>
+                            
+                            <tr>
+                              <th class="col-md-2">City</th>
+                              <td class="col-md-1">{{onboardingInfo.city}}</td>
+                            </tr>
+
+                            <tr>
+                              <th class="col-md-2">District</th>
+                              <td class="col-md-1">{{onboardingInfo.district}}</td>
+                            </tr>
+                            
+                            <tr>
+                              <th class="col-md-2">PinCode</th>
+                              <td class="col-md-1">{{onboardingInfo.pincode2}}</td>
+                              
+                            </tr>
+                          </tbody>
+                          
+                    </table>
+                </div>
+                
+                <div class="table-responsive col-md-6">
+                    <table class="table table-striped">
+                        
+                            <thead>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th class="col-md-2">Designation</th>
+                                    <td class="col-md-1">{{onboardingInfo.designation}}</td>
+                                  </tr>
+                                  <tr>
+                                    <th class="col-md-2">Date Of Birth</th>
+                                    <td class="col-md-1">{{onboardingInfo.dob}}</td>
+                                  </tr>
+                                  <tr>
+                                    <th class="col-md-2">Present Pay of Level</th>
+                                    <td class="col-md-1">{{onboardingInfo.payscaleName}}</td>
+                                  </tr>
+                                  <tr>
+                                    <th class="col-md-2">Official Phone no (STD+Phone no)</th>
+                                    <td class="col-md-1">{{onboardingInfo.phoneno1}}</td>
+                                  </tr>
+                                  <tr *ngIf="this.isDisabled1">
+                                    <th class="col-md-2">Ministry</th>
+                                    <td class="col-md-1" >{{ministryname.ministryName}}</td>
+                                  </tr>
+                                  
+                                  <tr *ngIf="this.isDisabled3">
+                                    <th class="col-md-2">Orgranization</th>
+                                    <td class="col-md-1">{{organizationname.organizationName}}</td>
+                                  </tr>
+                                  <tr >
+                                    <th class="col-md-2">Office Address</th>
+                                    <td class="col-md-1">{{onboardingInfo.oaddress}}</td>
+                                  </tr>
+                                  <tr *ngIf="this.isDisabled4">
+                                    <th class="col-md-2">State</th>
+                                    <td class="col-md-1">{{statename.state}}</td>
+                                  </tr>
+                                
+                                
+                              </tbody>
+                              
+                        </table>
+                        
+                </div>
+              </div>
+              <pre></pre>
+              <div style="color:white;border: 1px solid;
+              justify-content: center;
+              text-align: center;
+              background-color: #3232b7;
+              height: 32px;">
+                <h2 class="card-title">Approving Authority Detail</h2>
+            </div>
+              <div class="row" style="padding-top: 15px;">
+                <div class="table-responsive col-md-6">
+                    <table class="table table-striped">
+                        <thead>
+                        </thead>
+                        <tbody>
+                            <tr *ngIf="isDisabled5">
+                                <th class="col-md-1">Name</th>
+                                <td class="col-md-1">{{approvingname.name}}</td>
+                                </tr>
+                                
+                              <tr>
+                                <th class="col-md-2">EmployeeId</th>
+                                <td class="col-md-1">{{onboardingInfo.approvingemployeeid}}</td>
+                              </tr>
+                              
+                              
+                              <tr>
+                                <th class="col-md-2">Official Phone no (STD+Phone no)</th>
+                                <td class="col-md-1">{{onboardingInfo.phoneno3}}</td>
+                              </tr>
+                              
+                          </tbody>
+                          
+                    </table>
+                </div>
+                
+                <div class="table-responsive col-md-6">
+                    <table class="table table-striped">
+                        
+                            <thead>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th class="col-md-2">Designation</th>
+                                    <td class="col-md-1">{{onboardingInfo.approvingdesignation}}</td>
+                                  </tr>
+                                  <tr>
+                                    <th class="col-md-2">Official Email Id</th>
+                                    <td class="col-md-1">{{onboardingInfo.approvingemail}}</td>
+                                  </tr>
+                                  <tr>
+                                    <th class="col-md-2">Mobile Number</th>
+                                    <td class="col-md-1">{{onboardingInfo.phoneno4}}</td>
+                                  </tr>
+                              </tbody>
+                              
+                        </table>
+                        
+                </div>
+              </div>
+              <div style="color:white;border: 1px solid;
+              justify-content: center;
+              text-align: center;
+              background-color: #3232b7;
+              height: 32px;">
+                <h2 class="card-title">Application Detail</h2>
+            </div>
+            <div class="row" style="padding-top: 15px;">
+              <div class="table-responsive col-md-6">
+                  <table class="table table-striped">
+                      <thead>
+                      </thead>
+                      <tbody>
+                          <tr>
+                              <th>Nodal Officer is being appointed for following CGHS cities - </th>
+                            </tr>
+                              <!-- <tr *ngFor="let city of onboardingInfo.cghsCities">
+                                <th class="col-md-1"></th>
+                                <td class="col-md-1">{{city}}</td>
+                                
+                              </tr> -->
+                              <tr>
+
+                                <td><span *ngFor="let city of cityNames;let i = index"> {{i+1}}.&nbsp;{{city.cityName}}&nbsp; </span></td>
+                              </tr>
+                                
+                            
+                        </tbody>
+                        
+                  </table>
+              </div>
+              
+              <div class="table-responsive col-md-6">
+                  <table class="table table-striped">
+                      
+                          <thead>
+                          </thead>
+                          <tbody>
+                              <tr>
+                                  <th class="col-md-2">Total strength of serving staff eligible for CGHS card in above the above cities</th>
+                                  <td class="col-md-1">{{onboardingInfo.strength}}</td>
+                                </tr>
+                                
+                                
+                            </tbody>
+                            
+                      </table>
+                      
+              </div>
+            </div>
+
+            <div class="row" style="padding-top: 15px;" *ngIf="onboardingInfo.issigned">
+              <div class="col-md-offset-8">
+                <!-- <img [src]="logo" height="50px" width="50px"/> -->
+                  <p><img  src="../assets/images/esign-tick.png" width="10%" height="10%"></p>
+                 <b>Application is Signed by {{onboardingInfo.signedby}} on {{onboardingInfo.signedon}}</b>  
+              </div>
+            </div>
+
+            <form  method="post" *ngIf="!onboardingInfo.issigned" action= "https://nic-esigngateway.nic.in/eSign21/acceptClient" (ngSubmit)="eSignApplication(onboardingInfo.id, $event)" [formGroup] = "esignForm">
+              <input type="hidden" formControlName="username" name="username" />
+              <input type="hidden" formControlName="xml" name="xml"/>
+              <input type="hidden" formControlName="clientrequestURL" name="clientrequestURL"/>
+              <button style="float:right" class="btn btn-primary"  *ngIf="!onboardingInfo.issigned">eSign and Submit </button>
+            </form>
+              <!-- <button style="float:right" class="btn btn-primary" (click)="printThisPage()">Print This Page</button> -->
+            </div>
+        </div>
+    
+   </div>
+  

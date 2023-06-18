@@ -1,0 +1,265 @@
+<div class="container">
+  <div style="height:29px;"></div>
+  <div class="card">
+    <div style="padding: 36px;">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="fill">
+          <mat-label>Nodal/Approving Id</mat-label>
+          <input matInput formControlName="name" (keypress)="numberOnly($event)">
+        </mat-form-field>
+        <section class="example-section">
+          <span class="example-list-section">
+            
+          </span>
+          <span class="example-list-section">
+            <!-- <ul> -->
+              <div *ngFor="let subtask of subtasks">
+                <mat-checkbox formControlName="pdf" value="{{subtask.value}}" (change)="checkValue($event)">
+                  {{subtask.name}}
+                </mat-checkbox>
+              </div>
+            <!-- </ul> -->
+          </span>
+        </section>
+        
+        <button
+          type="submit"
+          class="btn btn-outline-success"
+          
+        >
+          search
+        </button>
+        &nbsp;&nbsp;
+        <span *ngIf="isShowDiv">
+          <button class="btn btn-outline-success" (click)="onClickDownloadPdf()">
+          Download Nodal PDF
+        </button></span>
+        <span *ngIf="isShowDiv2">
+          <button class="btn btn-outline-success" (click)="onClickDownloadPdf2()">
+          Download Approving PDF
+        </button></span>
+      </form>
+      
+      
+    </div>
+  </div>
+</div>
+<span *ngIf="isShowSpan">
+  
+  <div class="container" *ngIf="isDisabled">
+    <div class="card">
+        <div class="card-body">
+            <div style="color:white;border: 1px solid;
+            justify-content: center;
+            text-align: center;
+            background-color: #3232b7;
+            height: 32px;">
+                <h2 class="card-title">Nodal Detail</h2>
+            </div>
+            <div class="row" style="padding-top: 15px">
+                <div class="table-responsive col-md-6">
+                    <table class="table table-striped">
+                        <thead>
+                        </thead>
+                        <tbody>
+                            <tr>
+                              <th class="col-md-1">Name</th>
+                              <td class="col-md-1">{{result.firstname}}</td>
+                            </tr>
+                              
+                            <tr>
+                              <th class="col-md-2">EmployeeId</th>
+                              <td class="col-md-1">{{result.employeeid}}</td>
+                            </tr>
+                            
+                            <tr>
+                              <th class="col-md-2">Date of superannuation</th>
+                              <td class="col-md-1">{{result.superannuation}}</td>
+                            </tr>
+                            
+                            <tr>
+                              <th class="col-md-2">Official Email Id</th>
+                              <td class="col-md-1">{{result.email}}</td>
+                            </tr>
+                            
+                            <tr>
+                              <th class="col-md-2">Mobile Number</th>
+                              <td class="col-md-1">{{result.phoneno2}}</td>
+                            </tr>
+                            <tr>
+                              <th class="col-md-2">Department</th>
+                              <td class="col-md-1">{{result.department}}</td>
+                            </tr>
+                            <tr>
+                              <th class="col-md-2">Office Name</th>
+                              <td class="col-md-1">{{result.officename}}</td>
+                            </tr>
+                            
+                            <tr>
+                              <th class="col-md-2">City</th>
+                              <td class="col-md-1">{{result.city}}</td>
+                            </tr>
+
+                            <tr>
+                              <th class="col-md-2">District</th>
+                              <td class="col-md-1">{{result.district}}</td>
+                            </tr>
+                            
+                            <tr>
+                              <th class="col-md-2">PinCode</th>
+                              <td class="col-md-1">{{result.pincode2}}</td>
+                              
+                            </tr>
+                          </tbody>
+                          
+                    </table>
+                </div>
+                
+                <div class="table-responsive col-md-6">
+                    <table class="table table-striped">
+                        
+                            <thead>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th class="col-md-2">Designation</th>
+                                    <td class="col-md-1">{{result.designation}}</td>
+                                  </tr>
+                                  <tr>
+                                    <th class="col-md-2">Date Of Birth</th>
+                                    <td class="col-md-1">{{result.dob}}</td>
+                                  </tr>
+                                  <tr>
+                                    <th class="col-md-2">Present pay of Level</th>
+                                    <td class="col-md-1">{{result.payscale}}</td>
+                                  </tr>
+                                  <tr>
+                                    <th class="col-md-2">Official Phone no (STD+Phone no)</th>
+                                    <td class="col-md-1">{{result.phoneno1}}</td>
+                                  </tr>
+                                  <tr>
+                                    <th class="col-md-2">Ministry</th>
+                                    <td class="col-md-1">{{result.ministry}}</td>
+                                  </tr>
+                                  
+                                  <tr>
+                                    <th class="col-md-2">Orgranization</th>
+                                    <td class="col-md-1">{{result.organization}}</td>
+                                  </tr>
+                                  <tr>
+                                    <th class="col-md-2">Office Address</th>
+                                    <td class="col-md-1">{{result.oaddress}}</td>
+                                  </tr>
+                                  <tr>
+                                    <th class="col-md-2">State</th>
+                                    <td class="col-md-1">{{result.state}}</td>
+                                  </tr>
+                                
+                                
+                              </tbody>
+                              
+                        </table>
+                        
+                </div>
+              </div>
+              <pre></pre>
+              <div style="color:white;border: 1px solid;
+              justify-content: center;
+              text-align: center;
+              background-color: #3232b7;
+              height: 32px;">
+                <h2 class="card-title">Approving Authority Detail</h2>
+            </div>
+              <div class="row" style="padding-top: 15px;">
+                <div class="table-responsive col-md-6">
+                    <table class="table table-striped">
+                        <thead>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th class="col-md-1">Name</th>
+                                <td class="col-md-1">{{result.englishname}}</td>
+                                </tr>
+                                
+                              <tr>
+                                <th class="col-md-2">EmployeeId</th>
+                                <td class="col-md-1">{{result.approvingemployeeid}}</td>
+                              </tr>
+                              
+                              
+                              <tr>
+                                <th class="col-md-2">Official Phone no (STD+Phone no)</th>
+                                <td class="col-md-1">{{result.phoneno3}}</td>
+                              </tr>
+                              
+                          </tbody>
+                          
+                    </table>
+                </div>
+                
+                <div class="table-responsive col-md-6">
+                    <table class="table table-striped">
+                        
+                            <thead>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th class="col-md-2">Designation</th>
+                                    <td class="col-md-1">{{result.approvingdesignation}}</td>
+                                  </tr>
+                                  <tr>
+                                    <th class="col-md-2">Official Email Id</th>
+                                    <td class="col-md-1">{{result.approvingemail}}</td>
+                                  </tr>
+                                  <tr>
+                                    <th class="col-md-2">Mobile Number</th>
+                                    <td class="col-md-1">{{result.phoneno4}}</td>
+                                  </tr>
+                              </tbody>
+                              
+                        </table>
+                        
+                </div>
+              </div>
+              <div style="color:white;border: 1px solid;
+              justify-content: center;
+              text-align: center;
+              background-color: #3232b7;
+              height: 32px;">
+                <h2 class="card-title">Application Detail</h2>
+            </div>
+            <div class="row" style="padding-top: 15px;">
+              
+              
+              <div class="table-responsive col-md-6">
+                  <table class="table table-striped">
+                      
+                          <thead>
+                          </thead>
+                          <tbody>
+                              <tr>
+                                  <th class="col-md-2">Total strength of serving staff eligible for CGHS card in above the above cities</th>
+                                  <td class="col-md-1">{{result.strength}}</td>
+                                </tr>
+                                
+                                
+                            </tbody>
+                            
+                      </table>
+                      
+              </div>
+            </div>
+              <pre></pre>   
+              <pre></pre>   
+              <pre></pre>   
+              <!-- <button style="float:right" (click)="printThisPage()">Print This Page</button> -->
+                
+                            
+            </div>
+        </div>
+    
+   </div>
+  
+</span>
+
+    

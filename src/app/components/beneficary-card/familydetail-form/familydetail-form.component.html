@@ -1,0 +1,287 @@
+<form class="my-form" [formGroup]="familydetailform" (ngSubmit)="onsubmitfamilydetail()" enctype="multipart/form-data">
+
+    
+    <mat-card-content class="mat-card-content">
+        <mat-accordion multi>
+            
+
+            
+          <mat-expansion-panel [disabled]="true" [expanded]="true">
+            <mat-expansion-panel-header>
+              <mat-panel-description class="mat-toolbar">
+                  <span class="mat-span">Family Details</span>
+                </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <div  class="alert alert-success" *ngIf="isSuccess" role="alert">
+            {{this.successMessage}}
+          </div>
+          <div  class="alert alert-danger" *ngIf="isFail"  role="alert">
+            {{this.failureMessage}}
+          </div>
+          
+            
+            <div class="row">
+                
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead class="table-light">
+                            <tr>
+                                <th scope="col" class="text-center">S. No.</th>
+                                <th scope="col"  class="text-center">English Name</th>
+                                <th scope="col"  class="text-center">Hindi Name</th>
+                                <th scope="col"  class="text-center">Date of Birth</th>
+                                <th scope="col"  class="text-center">Relationship </th>
+                                <th scope="col"  class="text-center">Gender</th>
+                                <th scope="col"  class="text-center">Blood Group</th>
+                                <th scope="col"  class="text-center">Token No.</th>
+                                <th cscope="col"  class="text-center">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let familydetail of familyData;let i=index">
+                            <tr>
+                              
+                              <td scope="row">{{i+1}}</td>
+                              <td scope="row">{{familydetail.englishname}}</td>
+                              <td scope="row">{{familydetail.hindiname}}</td>
+                              <td scope="row"  class="text-center">{{familydetail.dateOfBirth | date:'mediumDate' }}</td>
+                              <td scope="row"  class="text-center">{{familydetail.relationName}}</td>
+                              <td scope="row"  class="text-center">{{familydetail.gender}}</td>
+                              <td scope="row"  class="text-center">{{familydetail.bloodGroupName}}</td>   
+                              <td scope="row">T4512</td>
+                              <td scope="row">
+                                <mat-icon style ="cursor: pointer" (click)="editFamilyMember(familydetail.id)" *ngIf="!benRegistrationData?.isFinal">edit</mat-icon> &nbsp;
+                                <mat-icon style ="cursor: pointer" (click)="onDelete(familydetail.id)" *ngIf="!benRegistrationData?.isFinal">delete</mat-icon> 
+
+                                
+                                <!-- <button type="button" (click)="onDelete()" class="btn btn-success" role="button" aria-pressed="true">Delete</button></td> -->
+                              <!-- <td scope="row"><button type="button"  (click)="editFamilyMember(familydetail.id)" class="btn btn-success" role="button" aria-pressed="true">Edit</button></td> -->
+                              
+                            </tr>
+                          </tbody>
+                          
+                    </table>
+                </div>
+                
+                <div class="row mt-3 mb-4 px-2">
+                  <div class="col-12 text-center px-2">
+                    <button mat-button matStepperPrevious class="btn btn-primary mr-2">Back</button>&nbsp; 
+                    <button mat-button matStepperNext class="btn btn-primary mr-2">Next</button>&nbsp; 
+                  </div>
+                </div>
+
+            </div>
+          </mat-expansion-panel>
+            <mat-expansion-panel [disabled]="false"  [expanded]="true">
+              <mat-expansion-panel-header>
+                <mat-panel-description class="mat-toolbar">
+                    <span class="mat-span" *ngIf="this.memberId != null" >Update Family Member</span>
+                    <span class="mat-span" *ngIf="this.memberId == null" >Add Family Member</span>
+                  </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <div class="row">
+              <form [formGroup]="abhaform" (ngSubmit)="onSubmitAbhaid()">
+                <div class="row" *ngIf="verifyabha">
+                  <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-5">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Enter Abha-Id</mat-label>
+                      <input matInput [textMask]="{mask: abhaInput}" type="text" formControlName="abhaid" class="form-control" placeholder=""
+                        autocomplete="off" required />
+    
+                    </mat-form-field>
+                  </div>
+                  <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-5" *ngIf="verifyabha">
+                    <button mat-button type="submit" class="btn btn-primary">
+                      <mat-icon>search</mat-icon>
+                    </button>
+                  </div>
+                </div>
+    
+              </form>
+              <form [formGroup]="otpform" (ngSubmit)="onSubmitOtp()">
+                <div class="row" *ngIf="verifyotp">
+                  <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-5">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Your Abhad-Id</mat-label>
+                      <input matInput type="text" readonly formControlName="abhaid2" class="form-control" placeholder=""
+                        autocomplete="off" required />
+                      <mat-error class="text-danger" *ngIf="
+                                otpform.get('abhaid2').touched &&
+                                otpform.get('abhaid2').errors?.required
+                              ">
+                        <strong>Required field</strong>
+                      </mat-error>
+    
+                    </mat-form-field>
+                  </div>
+                  <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-5" *ngIf="otp">
+                    <mat-form-field appearance="outline"><mat-expansion-panel [disabled]="true" [expanded]="true"></mat-expansion-panel>
+                      <mat-label>Verify Otp</mat-label>panel
+                      <input matInput type="text"  formControlName="otp" class="form-control"
+                        placeholder="" autocomplete="off" required />
+                      <mat-error class="text-danger" *ngIf="
+                                    otpform.get('otp').touched &&
+                                    otpform.get('otp').errors?.required
+                                  ">
+                        <strong>Required field</strong>
+                      </mat-error>
+                      <mat-error *ngIf="otpform.controls.otp.errors?.invalidOTP">Invalid OTP</mat-error>
+    
+                    </mat-form-field>
+                  </div>
+                  <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-2" *ngIf="verify">
+                    <button mat-button type="submit" class="btn btn-success">Verify</button>
+                  </div>
+                </div>
+    
+              </form>
+    
+            </div>
+
+            
+
+            <div class="row">
+              <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-6">
+                <mat-form-field appearance="outline">
+                    <mat-label>Name <span style="color: red">(English)</span></mat-label>
+                    <input matInput type="text" formControlName="englishname" class="form-control" placeholder=""
+                      autocomplete="off" />
+                      <mat-error class="text-danger" *ngIf="
+                  familydetailform.get('englishname').touched &&
+                  familydetailform.get('englishname').errors?.required">
+                    <strong>Required field</strong>
+                  </mat-error>
+                  <mat-error class="text-danger" *ngIf="
+                      !familydetailform.get('englishname').valid">
+                    <strong>{{this.message}}</strong>
+                  </mat-error>
+                  </mat-form-field>
+              </div>
+              <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-6">
+                <mat-form-field appearance="outline">
+                  <mat-label>Name <span style="color: red">(Hindi)</span></mat-label>
+                  <input matInput type="text"  formControlName="hindiname" class="form-control" placeholder=""
+                    autocomplete="off"  />
+                  <mat-error class="text-danger" *ngIf="
+                  familydetailform.get('hindiname').touched &&
+                  familydetailform.get('hindiname').errors?.required">
+                    <strong>Required field</strong>
+                  </mat-error>
+                  <mat-error class="text-danger" *ngIf="
+                      !familydetailform.get('hindiname').valid">
+                    <strong>{{this.message}}</strong>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              </div>
+              <div class="row">
+                <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-6">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Date Of Birth</mat-label>
+                    <input matInput  placeholder="mm/dd/yyyy" [matDatepicker]="picker" formControlName="dateOfBirth" />
+                    <mat-datepicker-toggle matIconPrefix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error class="text-danger" *ngIf="
+                    familydetailform.get('dateOfBirth').touched &&
+                    familydetailform.get('dateOfBirth').errors?.required">
+                      <strong>Required field</strong>
+                    </mat-error>
+
+                    <mat-error class="text-danger" *ngIf="
+                  !familydetailform.get('dateOfBirth').valid">
+                <strong>Required Field </strong>
+              </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-6">
+                  <mat-radio-group aria-label="Select an option" formControlName="gender">
+                    <div> Gender</div>
+                    <mat-radio-button value="M">Male</mat-radio-button>
+                    <mat-radio-button value="F">Female</mat-radio-button>
+                    <mat-radio-button value="O">Other</mat-radio-button>
+                  </mat-radio-group>
+              <mat-error class="text-danger" *ngIf="
+                      !familydetailform.get('gender').valid">
+                    <strong>{{this.message}}</strong>
+              </mat-error>
+              </div>
+              </div>
+              
+        
+            
+              <div class="row"><!--start -->
+                
+                  <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-6">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Blood Group</mat-label>
+                      <mat-select placeholder="--select--" formControlName="bloodGroupCode">
+                        <mat-option value="1" >A+</mat-option>
+                        <mat-option value="2" >A-</mat-option>
+                        <mat-option value="3" >B+</mat-option>
+                        <mat-option value="4" >B-</mat-option>
+                        <mat-option value="5" >AB+</mat-option>
+                        <mat-option value="6" >AB-</mat-option>
+                        <mat-option value="7" >O+</mat-option>
+                        <mat-option value="9" >O-</mat-option>
+                      </mat-select>
+                      <mat-error class="text-danger" *ngIf="
+                  familydetailform.get('bloodGroupCode').touched &&
+                  familydetailform.get('bloodGroupCode').errors?.required">
+                    <strong>Required field</strong>
+                  </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-6">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Relationship</mat-label>
+                      <mat-select placeholder="--select--" formControlName="relationCode">
+                        <mat-option value="1" >Self</mat-option>
+                        <mat-option value="2" >Spouse</mat-option>
+                        <mat-option value="3" >Son</mat-option>
+                        <mat-option value="4" >Daughter</mat-option>
+                        <mat-option value="5" >Father</mat-option>
+                        <mat-option value="6" >Mother</mat-option>
+                        <mat-option value="7" >Sister</mat-option>
+                      </mat-select>
+
+                      <mat-error class="text-danger" *ngIf="
+                  familydetailform.get('relationCode').touched &&
+                  familydetailform.get('relationCode').errors?.required">
+                    <strong>Required field</strong>
+                  </mat-error>
+                    </mat-form-field>
+                  </div>
+                  
+              </div><!--end -->
+              <div class="row"><!-- start -->
+                
+                  <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-6">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Mobile Number</mat-label>
+                      <input matInput type="text" class="form-control" placeholder="" autocomplete="off" formControlName="mobile" />
+                      <mat-error class="text-danger" *ngIf="
+                      familydetailform.get('mobile').touched &&
+                      familydetailform.get('mobile').errors?.required">
+                        <strong>Required field</strong>
+                      </mat-error>
+                      <mat-error class="text-danger" *ngIf="!familydetailform.get('mobile').valid">
+                        {{this.message}}
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+              </div><!-- end -->
+             
+              <div class="row mt-3 mb-4 px-2">
+                <div class="col-12 text-center px-2">
+                  <button type="submit" class="btn btn-primary mr-2" *ngIf="this.memberId!=null" [disabled]="benRegistrationData?.isFinal">Update</button>&nbsp;
+                  <button type="submit" class="btn btn-primary mr-2" *ngIf="this.memberId==null" >Add</button>&nbsp;
+                  <button type="reset" class="btn btn-primary mr-2">Reset</button>&nbsp;
+                </div>
+              </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+        
+      </mat-card-content>
+    </form>

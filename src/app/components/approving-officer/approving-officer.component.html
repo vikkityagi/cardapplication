@@ -1,0 +1,239 @@
+  <div class="container card">
+    <div class="mt-3">
+      <form
+        class="example-form"
+        [formGroup]="approvingform"
+        (ngSubmit)="onSubmitApprovingOfficer()"
+      >
+        <div class="row">
+          <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Name</mat-label>
+              <input
+                matInput
+                formControlName="name"
+                placeholder="Placeholder"
+              />
+              <mat-error
+                class="text-danger"
+                *ngIf="
+                  approvingform.get('name').touched &&
+                  approvingform.get('name').errors?.required
+                "
+              >
+                <strong>Required field</strong>
+              </mat-error>
+              <mat-error
+                class="text-danger"
+                *ngIf="!approvingform.get('name').valid"
+              >
+                <strong>{{
+                    approvingform.get("name").getError("serverError")
+                }}</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Email</mat-label>
+              <input
+                matInput
+                formControlName="email"
+                placeholder="Placeholder"
+              />
+              <mat-error
+                class="text-danger"
+                *ngIf="
+                  approvingform.get('email').touched &&
+                  approvingform.get('email').errors?.required
+                "
+              >
+                <strong>Required field</strong>
+              </mat-error>
+              <mat-error
+                class="text-danger"
+                *ngIf="!approvingform.get('email').valid"
+              >
+                <strong>{{
+                    approvingform.get("email").getError("serverError")
+                }}</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Mobile Number</mat-label>
+              <input
+                matInput
+                formControlName="mobileNumber"
+                placeholder="Placeholder"
+              />
+              <mat-error
+                class="text-danger"
+                *ngIf="
+                  approvingform.get('mobileNumber').touched &&
+                  approvingform.get('mobileNumber').errors?.required
+                "
+              >
+                <strong>Required field</strong>
+              </mat-error>
+              <mat-error
+                class="text-danger"
+                *ngIf="!approvingform.get('mobileNumber').valid"
+              >
+                <strong>{{
+                    approvingform.get("mobileNumber").getError("serverError")
+                }}</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Designation</mat-label>
+              <input
+                matInput
+                formControlName="designation"
+                placeholder="Placeholder"
+              />
+              <mat-error
+                class="text-danger"
+                *ngIf="
+                  approvingform.get('designation').touched &&
+                  approvingform.get('designation').errors?.required
+                "
+              >
+                <strong>Required field</strong>
+              </mat-error>
+              <mat-error
+                class="text-danger"
+                *ngIf="!approvingform.get('designation').valid"
+              >
+                <strong>{{
+                    approvingform.get("designation").getError("serverError")
+                }}</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Ministry</mat-label>
+              <mat-select
+                placeholder="--Select--"
+                formControlName="ministry"
+                (selectionChange)="getdepartment($event)"
+              >
+                <mat-option
+                  value="{{ ministry.ministryCode }}"
+                  *ngFor="let ministry of ministryList"
+                  >{{ ministry.ministryName }}</mat-option
+                >
+              </mat-select>
+              <mat-error
+                class="text-danger"
+                *ngIf="
+                  approvingform.get('ministry').touched &&
+                  approvingform.get('ministry').errors?.required
+                "
+              >
+                <strong>Required field</strong>
+              </mat-error>
+              <ng-content></ng-content>
+            </mat-form-field>
+          </div>
+          <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Department</mat-label>
+              <mat-select
+                placeholder="--Select--"
+                formControlName="department"
+                (selectionChange)="getorganization($event)"
+              >
+                <mat-option
+                  value="{{ state.departmentCode }}"
+                  *ngFor="let state of ministryStateCode"
+                  >{{ state.departmentName }}</mat-option
+                >
+              </mat-select>
+              <mat-error
+                class="text-danger"
+                *ngIf="
+                  approvingform.get('department').touched &&
+                  approvingform.get('department').errors?.required
+                "
+              >
+                <strong>Required field</strong>
+              </mat-error>
+              <ng-content></ng-content>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Organization</mat-label>
+              <mat-select
+                placeholder="--Select--"
+                formControlName="organization"
+              >
+                <mat-option
+                  value="{{ org.organizationCode }}"
+                  *ngFor="let org of deptCode"
+                  >{{ org.organizationName }}</mat-option
+                >
+              </mat-select>
+              <mat-error
+                class="text-danger"
+                *ngIf="
+                  approvingform.get('organization').touched &&
+                  approvingform.get('organization').errors?.required
+                "
+              >
+                <strong>Required field</strong>
+              </mat-error>
+              <ng-content></ng-content>
+            </mat-form-field>
+          </div>
+
+          <!-- </div> -->
+        </div>
+        <div class="row mt-3 mb-4 px-2">
+          <div class="col-12 text-center px-2">
+            <button
+              type="submit"
+              [disabled]="!this.approvingform.valid"
+              class="btn btn-primary mr-2"
+            >
+              Save</button
+            >&nbsp;&nbsp;
+          </div>
+        </div>
+      </form>
+    </div>
+    <table class="table" *ngIf="isDisabled">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Mobile</th>
+          <th>Ministry</th>
+          <th>Department</th>
+          <th>Organization</th>
+          <th>Designation</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let approving of approvingofficerdata">
+        <tr>
+          <td>{{ approving.name }}</td>
+          <td>{{ approving.email }}</td>
+          <td>{{ approving.mobilenumber }}</td>
+          <td>{{ approving.ministry }}</td>
+          <td>{{ approving.department }}</td>
+          <td>{{ approving.organization }}</td>
+          <td>{{ approving.designation }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+

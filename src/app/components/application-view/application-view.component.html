@@ -1,0 +1,182 @@
+<div class="container">
+    <div class="card">
+
+        <div class="row mt-3 mb-4 px-2">
+
+            <div class="container" *ngIf="applicationType==11">
+              <div class="card">
+                <div class="card-body">
+                  <div style="color:white;border: 1px solid;
+                      justify-content: center;
+                      text-align: center;
+                      background-color: #3232b7;
+                      height: 32px;">
+                    <h2 class="card-title">Application Detail</h2>
+                  </div>
+                  <div class="row" style="padding-top: 15px">
+                    <div class="table-responsive">
+                      <table class="table table-striped" *ngIf="this.showData">
+                        <thead>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <th class="col-md-2">Application No</th>
+                            <td class="col-md-1">{{primaryBeneficiaryData.benRegistrationApplicationResource.applicationnumber}}</td>
+                            <th class="col-md-2">Name(English)</th>
+                            <td class="col-md-1">{{primaryBeneficiaryData.englishname}}</td>
+                            <th class="col-md-2">Name(Hindi)</th>
+                            <td class="col-md-1">{{primaryBeneficiaryData.hindiname}}</td>
+      
+                          </tr>
+                          <tr>
+                            <th class="col-md-2">Card Type</th>
+                            <td class="col-md-1">{{primaryBeneficiaryData.cardTypeName}}</td>
+                            <th class="col-md-2">Central Deputation</th>
+                            <td class="col-md-1">{{primaryBeneficiaryData.centraldeputation=='1'?'Yes':'No'}}</td>
+                          </tr>
+                          <tr>
+                            <th class="col-md-2">Date of Birth</th>
+                            <td class="col-md-1">{{primaryBeneficiaryData.dob | date:'mediumDate'}}</td>
+                            <th class="col-md-2">Gender</th>
+                            <td class="col-md-1">{{primaryBeneficiaryData.gender=='M'?'Male':'Female'}}</td>
+                            <th class="col-md-2">Present Pay Level</th>
+                            <td class="col-md-1">{{primaryBeneficiaryData.presentPay}}</td>
+                          </tr>
+      
+                          <tr>
+      
+                            <th class="col-md-2">Pay Scale</th>
+                            <td class="col-md-1">{{primaryBeneficiaryData.payScaleName}}</td>
+                          </tr>
+      
+                          <tr>
+                            <th class="col-md-2">Ministry</th>
+                            <td class="col-md-1">{{ministryNameResponse.ministryName}}</td>
+                            <th class="col-md-2">Department</th>
+                            <td class="col-md-1">{{departmentNameResponse.departmentName}}</td>
+                            <th class="col-md-2">Organization</th>
+                            <td class="col-md-1">{{organizationNameResponse.organizationName}}</td>
+      
+                          </tr>
+      
+                          <tr>
+                            <th>CGHS City Name</th>
+                            <td>{{primaryBeneficiaryData.cghsCityName}}</td>
+                            <th>Ward Entitlement</th>
+                            <td>{{WardEntitlement.wardEntitlement}}</td>
+                          </tr>
+      
+                          <tr>
+                            <th class="col-md-2">Office Address</th>
+                            <td class="col-md-1">{{primaryBeneficiaryData.officeaddress}}</td>
+                            <th class="col-md-2">Office Email</th>
+                            <td class="col-md-1">{{primaryBeneficiaryData.officeemail}}</td>
+                            <th class="col-md-2">Office Phone</th>
+                            <td class="col-md-1">{{primaryBeneficiaryData.officephoneno}}</td>
+                          </tr>
+      
+                          <tr>
+                            <th class="col-md-2">Office PIN Number</th>
+                            <td class="col-md-1">{{primaryBeneficiaryData.officepincode}}</td>
+      
+      
+                          </tr>
+      
+                          <tr>
+                            <th class="col-md-2">Residential Address</th>
+                            <td class="col-md-1">{{primaryBeneficiaryData.residentialaddress}}</td>
+                            <th class="col-md-2">Residential Place</th>
+                            <td class="col-md-1">{{primaryBeneficiaryData.residentialplace}}</td>
+                            <th class="col-md-2">Residential City</th>
+                            <td class="col-md-1">{{primaryBeneficiaryData.residentialcity}}</td>
+                          </tr>
+      
+                          <tr>
+                            <th class="col-md-2">Residential PinCode</th>
+                            <td class="col-md-1">{{primaryBeneficiaryData.residentialcity}}</td>
+                            <th class="col-md-2">Residential Phone</th>
+                            <td class="col-md-1">{{primaryBeneficiaryData.residentialphone}}</td>
+                            <th class="col-md-2">Residential Mobile</th>
+                            <td class="col-md-1">{{primaryBeneficiaryData.residentialmobile}}</td>
+                          </tr>
+      
+                          <tr>
+      
+                            <th class="col-md-2">Residential Retirement Date</th>
+                            <td class="col-md-1">{{primaryBeneficiaryData.residentialretirementdate | date:'mediumDate'}}</td>
+                            <th class="col-md-2">Residential Email</th>
+                            <td class="col-md-1">{{primaryBeneficiaryData.residentialemail}}</td>
+                          </tr>
+      
+      
+                        </tbody>
+      
+                      </table>
+                    </div>
+                  </div>
+      
+                  <pre></pre>
+      
+                  <div style="color:white;border: 1px solid;
+                        justify-content: center;
+                        text-align: center;
+                        background-color: #3232b7;
+                        height: 32px;">
+                    <h2 class="card-title">Family Member Detail</h2>
+                  </div>
+                  <div class="row" style="padding-top: 15px;">
+                    <div class="table-responsive">
+                      <table class="table table-striped">
+                        <thead class="table-light">
+                          <tr>
+      
+      
+                            <th class="col-md-2">S. No</th>
+                            <th class="col-md-2">Name(English)</th>
+                            <th class="col-md-2">Name(Hindi)</th>
+                            <th class="col-md-2">Phone</th>
+                            <th class="col-md-2">Gender</th>
+                            <th class="col-md-2">Date of Birth</th>
+                            <th class="col-md-2">Relation Code</th>
+                            <th class="col-md-2">Blood Group</th>
+      
+      
+                          </tr>
+      
+                        </thead>
+                        <tbody *ngFor="let member of familyData;let i=index">
+      
+                          <tr>
+      
+                            <td class="col-md-1">{{i+1}}</td>
+                            <td class="col-md-1">{{member.englishname}}</td>
+                            <td class="col-md-1">{{member.hindiname}}</td>
+      
+      
+                            <td class="col-md-1">{{member.mobile}}</td>
+      
+                            <td class="col-md-1">{{member.gender=='M'?'Male':'Female'}}</td>
+                            <td class="col-md-1">{{member.dateOfBirth | date:'mediumDate'}}</td>
+                            <td class="col-md-1">{{member.relationName}}</td>
+                            <td class="col-md-1">{{member.bloodGroupName}}</td>
+      
+                          </tr>
+                        </tbody>
+      
+                      </table>
+                    </div>
+      
+                  </div>
+                  
+      
+                </div>
+              </div>
+      
+      
+      
+            </div>
+ 
+          </div>
+
+    </div>
+</div>

@@ -1,0 +1,684 @@
+<mat-card>
+
+  <form class="my-form" [formGroup]="nodalofficer1" (ngSubmit)="onSubmitNodalOfficer()" enctype="multipart/form-data">
+
+    <mat-card-content class="mat-card-content">
+      <mat-accordion multi>
+        <mat-expansion-panel [disabled]="true" [expanded]="true">
+          <mat-expansion-panel-header>
+            <mat-panel-description class="mat-toolbar">
+              <span class="mat-span">Onboarding Instructions</span>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+              <ul style="font-size:16px;list-style-type: circle;">
+                <li>
+                  This is self registration form for the nodal officer authorised by his department to approve/forward
+                  CGHS Beneficiary online registration form on this portal.
+                </li>
+                <li>
+                  The nodal officer must be of section officer and above level.
+                </li>
+                <li>
+                  Fill required details of Nodal officer and approving authority.
+                </li>
+                <li>
+                  Approving Authority must of Director and above level.
+                </li>
+                <li>
+                  Upload of valid Employee ID card is mandatory for both nodal officer and approving authority.
+
+                </li>
+                <li>
+                  CGHS registration are done at level AD officer located in various CGHS cities.
+                </li>
+                <li>
+                  Mention the list of CGHS cities for which the nodal officer is authorised to approve/forward
+                  beneficiary registration form.
+                </li>
+                <li>
+                  Avail the draft saving option for easy filing.
+                </li>
+              </ul>
+
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </mat-card-content>
+
+
+    <mat-card-content class="mat-card-content">
+      <mat-accordion multi>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-description class="mat-toolbar">
+              <span class="mat-span">Nodal Officer-1 Self Registration</span>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="row">
+            <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-2">
+              <mat-form-field appearance="outline">
+                <mat-label>Title</mat-label>
+                <mat-select formControlName="title" placeholder="--select--">
+                  <mat-option value="mr">Mr.</mat-option>
+                  <mat-option value="ms">Ms.</mat-option>
+                  <mat-option value="mrs">Mrs.</mat-option>
+                  <mat-option value="dr">Dr.</mat-option>
+                </mat-select>
+                <mat-error class="text-danger" *ngIf="
+                    nodalofficer1.get('title').touched  &&
+                    nodalofficer1.get('title').errors?.required
+                  ">
+                  <strong>Required field</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            
+            <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-3">
+              <mat-form-field appearance="outline">
+                <mat-label>First Name</mat-label>
+                <input matInput type="text" formControlName="firstname" class="form-control" placeholder=""
+                  autocomplete="off" required  />
+                <mat-error class="text-danger" *ngIf="
+                    nodalofficer1.get('firstname').touched &&
+                    nodalofficer1.get('firstname').errors?.required
+                  ">
+                  <strong>Required field</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-3">
+              <mat-form-field appearance="outline">
+                <mat-label>Middle Name</mat-label>
+                <input matInput formControlName="middlename" type="text"  class="form-control" placeholder=""
+                  autocomplete="off" />
+                
+              </mat-form-field>
+            </div>
+            <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-3">
+              <mat-form-field appearance="outline">
+                <mat-label>Last Name</mat-label>
+                <input matInput type="text" formControlName="lastname" class="form-control" placeholder=""
+                  autocomplete="off" required/>
+                <mat-error class="text-danger" *ngIf="
+                    nodalofficer1.get('lastname').touched &&
+                    nodalofficer1.get('lastname').errors?.required
+                  ">
+                  <strong>Required field</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-3">
+              <mat-form-field appearance="outline">
+                <mat-label>Designation</mat-label>
+                <input matInput type="text" formControlName="designation" class="form-control" placeholder=""
+                  autocomplete="off" required />
+                <mat-error class="text-danger" *ngIf="
+                    nodalofficer1.get('designation').touched &&
+                    nodalofficer1.get('designation').errors?.required
+                  ">
+                  <strong>Required field</strong>
+                </mat-error>
+                <mat-error class="text-danger" *ngIf="
+                    nodalofficer1.get('designation').touched &&
+                    nodalofficer1.get('designation').errors?.pattern
+                  ">
+                  <strong>Designation Name Should be Alphabet only</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-3">
+              <mat-form-field appearance="outline">
+                <mat-label>Employee ID</mat-label>
+                <input matInput type="text" formControlName="employeeid" class="form-control" placeholder=""
+                  autocomplete="off" oninput="this.value = this.value.toUpperCase()" required />
+                <mat-error class="text-danger" *ngIf="
+                    nodalofficer1.get('employeeid').touched &&
+                    nodalofficer1.get('employeeid').errors?.required
+                  ">
+                  <strong>Required field</strong>
+                </mat-error>
+                <mat-error class="text-danger" *ngIf="
+                  nodalofficer1.get('employeeid').touched &&
+                  nodalofficer1.get('employeeid').errors?.pattern
+                ">
+                  <strong>Employee id must be correct</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-3">
+              <mat-form-field appearance="outline">
+                <mat-label>Date Of Birth</mat-label>
+                <input matInput placeholder="mm/dd/yyyy" [matDatepicker]="picker" formControlName="dob" />
+                <mat-datepicker-toggle matIconPrefix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error class="text-danger" *ngIf="
+                    nodalofficer1.get('dob').touched &&
+                    nodalofficer1.get('dob').errors?.required
+                  ">
+                  <strong>Dob is required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-3">
+              <mat-form-field appearance="outline">
+                <mat-label>Date Of Supperannuation</mat-label>
+                <input matInput placeholder="mm/dd/yyyy" [matDatepicker]="picker1" formControlName="superannuation" />
+                <mat-datepicker-toggle matIconPrefix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+                <mat-error class="text-danger" *ngIf="
+                    nodalofficer1.get('superannuation').touched &&
+                    nodalofficer1.get('superannuation').errors?.required
+                  ">
+                  <strong>Dob Superannuation is required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-3">
+              <mat-form-field appearance="outline">
+                <mat-label>Present Pay Level</mat-label>
+                <mat-select placeholder="--select--" formControlName="payscaleCode">
+
+                  <mat-option value="{{lis.id}}" *ngFor="let lis of payscalelist">{{lis.payscale}}</mat-option>
+                </mat-select>
+                <mat-error class="text-danger"
+                  *ngIf="(nodalofficer1.get('payscaleCode').touched) && nodalofficer1.get('payscaleCode').errors?.required">
+                  <strong>Pay Scale is required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-3">
+              <mat-form-field appearance="outline">
+                <mat-label> E-mail Address </mat-label>
+                <mat-icon class="light-icon" matPrefix>email</mat-icon>
+                <input matInput placeholder="" formControlName="email" />
+                <mat-error class="text-danger" *ngIf="
+                    nodalofficer1.get('email').touched &&
+                    nodalofficer1.get('email').errors?.required
+                  ">
+                  <strong>Required field</strong>
+                </mat-error>
+                <mat-error class="text-danger" *ngIf="
+                    nodalofficer1.get('email').touched &&
+                    nodalofficer1.get('email').errors?.pattern
+                  ">
+                  <strong>Enter correct email id</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-3">
+              <mat-form-field appearance="outline">
+                <mat-label>Land Line (STDNo + PhoneNo)</mat-label>
+                <mat-icon class="light-icon" matPrefix>phone</mat-icon>
+                <input matInput number maxlength="10" placeholder="Land Line Number with STD Code" inputmode="numeric"
+                  formControlName="phoneno1" />
+                <mat-error class="text-danger" *ngIf="
+                    nodalofficer1.get('phoneno1').touched &&
+                    nodalofficer1.get('phoneno1').errors?.required
+                  ">
+                  <strong>Required field</strong>
+                </mat-error>
+                <mat-error class="text-danger" *ngIf="
+                    nodalofficer1.get('phoneno1').touched &&
+                    nodalofficer1.get('phoneno1').errors?.minlength
+                  ">
+                  <strong>Phone Number too short</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-3">
+              <mat-form-field appearance="outline">
+                <mat-label>Mobile Number</mat-label>
+                <mat-icon class="light-icon" matPrefix>phone</mat-icon>
+                <input matInput number maxlength="12" inputmode="numeric" formControlName="phoneno2" />
+                <mat-error class="text-danger" *ngIf="
+                    nodalofficer1.get('phoneno2').touched &&
+                    nodalofficer1.get('phoneno2').errors?.required
+                  ">
+                  <strong>Required field</strong>
+                </mat-error>
+                <mat-error class="text-danger" *ngIf="
+                    nodalofficer1.get('phoneno2').touched &&
+                    nodalofficer1.get('phoneno2').errors?.minlength
+                  ">
+                  <strong>Mobile Number too short</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-6">
+                <mat-form-field appearance="outline">
+                  <mat-label>Ministry</mat-label>
+                  <mat-select placeholder="--Select--" formControlName="ministry" (selectionChange)="getdepartment($event)">
+                    <mat-option value="{{ministry.ministryCode}}" *ngFor="let ministry of ministryList">{{ministry.ministryName}}</mat-option>
+                  </mat-select>
+                  <mat-error class="text-danger" *ngIf="
+                          nodalofficer1.get('ministry').touched &&
+                          nodalofficer1.get('ministry').errors?.required
+                        ">
+                    <strong>Required field</strong>
+                  </mat-error>
+                  <ng-content></ng-content>
+                </mat-form-field>
+              </div>
+              <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-6">
+                <mat-form-field appearance="outline">
+                  <mat-label>Department</mat-label>
+                  <mat-select placeholder="--Select--" formControlName="department" (selectionChange)="getorganization($event)">
+                    <mat-option value="{{state.departmentCode}}" *ngFor="let state of ministryStateCode">{{state.departmentName}}</mat-option>
+                  </mat-select>
+                  <mat-error class="text-danger" *ngIf="
+                          nodalofficer1.get('department').touched &&
+                          nodalofficer1.get('department').errors?.required
+                        ">
+                    <strong>Required field</strong>
+                  </mat-error>
+                  <ng-content></ng-content>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-6">
+                <mat-form-field appearance="outline">
+                  <mat-label>Organization</mat-label>
+                  <mat-select placeholder="--Select--" formControlName="organization" (selectionChange)="getApprovingAuthorityUsers($event);getOffices($event);">
+                    <mat-option value={{org.organizationCode}} *ngFor="let org of deptCode">{{org.organizationName}}</mat-option>
+                  </mat-select>
+                  <mat-error class="text-danger" *ngIf="
+                          nodalofficer1.get('organization').touched &&
+                          nodalofficer1.get('organization').errors?.required
+                        ">
+                    <strong>Required field</strong>
+                  </mat-error>
+                  <ng-content></ng-content>
+                </mat-form-field>
+              </div>
+              <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-6">
+                <mat-form-field appearance="outline">
+                  <mat-label>Office Name</mat-label>
+                  <mat-select placeholder="--Select--" formControlName="organizationOfficeId">
+                    <mat-option value="{{office.id}}" *ngFor="let office of officeList">{{office.officeName}}</mat-option>
+                  </mat-select>
+                  <mat-error class="text-danger" *ngIf="
+                          nodalofficer1.get('organizationOfficeId').touched &&
+                          nodalofficer1.get('organizationOfficeId').errors?.required
+                        ">
+                    <strong>Required field</strong>
+                  </mat-error>
+                  <ng-content></ng-content>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-9">
+                <mat-form-field appearance="outline">
+                  <mat-label>Office Address</mat-label>
+                  <!-- <mat-icon class="light-icon" matPrefix>phone</mat-icon> -->
+                  <input matInput type="text" class="form-control" formControlName="oaddress" />
+                  <mat-error class="text-danger" *ngIf="
+                      nodalofficer1.get('oaddress').touched &&
+                      nodalofficer1.get('oaddress').errors?.required
+                    ">
+                    <strong>Required field</strong>
+                  </mat-error>
+                  <mat-error class="text-danger" *ngIf="
+                      nodalofficer1.get('oaddress').touched &&
+                      nodalofficer1.get('oaddress').errors?.pattern
+                    ">
+                    <strong>please enter correct address</strong>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+  
+  
+              <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-3">
+  
+                <mat-form-field appearance="outline">
+                  <mat-label>City</mat-label>
+                  <!-- <mat-icon class="light-icon" matPrefix>phone</mat-icon> -->
+                  <input matInput type="text" class="form-control" formControlName="city" />
+                  <mat-error class="text-danger" *ngIf="
+                      nodalofficer1.get('city').touched &&
+                      nodalofficer1.get('city').errors?.required
+                    ">
+                    <strong>Required field</strong>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-3">
+  
+                <mat-form-field appearance="outline">
+                  <mat-label>State</mat-label>
+                  <mat-select placeholder="--Select--" formControlName="state">
+                    <mat-option value="{{state.id}}" *ngFor="let state of state">{{state.state}}</mat-option>
+                  </mat-select>
+                  <mat-error class="text-danger" *ngIf="
+                          nodalofficer1.get('state').touched &&
+                          nodalofficer1.get('state').errors?.required
+                        ">
+                    <strong>Required field</strong>
+                  </mat-error>
+                  <ng-content></ng-content>
+                </mat-form-field>
+              </div>
+              <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-3">
+  
+                <mat-form-field appearance="outline">
+                  <mat-label>District</mat-label>
+                  <mat-select placeholder="--Select--" formControlName="district">
+                    <mat-option value="district-1">district-1</mat-option>
+                  </mat-select>
+                  <mat-error class="text-danger" *ngIf="
+                          nodalofficer1.get('district').touched &&
+                          nodalofficer1.get('district').errors?.required
+                        ">
+                    <strong>Required field</strong>
+                  </mat-error>
+                  <ng-content></ng-content>
+                </mat-form-field>
+              </div>
+              <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-3">
+  
+                <mat-form-field appearance="outline">
+                  <mat-label>Pin Code</mat-label>
+                  <input matInput placeholder="" maxlength="6" (keypress)="numberOnly($event)" formControlName="pincode2" />
+                  <mat-error class="text-danger" *ngIf="
+                          (nodalofficer1.get('pincode2').touched ||
+                            nodalofficer1.get('pincode2').dirty) &&
+                          nodalofficer1.get('pincode2').errors?.required
+                        ">
+                    <strong>Pin code required</strong>
+                  </mat-error>
+                  <mat-error class="text-danger" *ngIf="
+                          (nodalofficer1.get('pincode2').touched ||
+                            nodalofficer1.get('pincode2').dirty) &&
+                          nodalofficer1.get('pincode2').errors?.minlength
+                        ">
+                    <strong>Pin code too short</strong>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            
+            
+            <div class="row">
+              
+            <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+              <label for="file">Upload a valid copy of Employee ID </label>
+            </div>
+            <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+
+              <!--                 
+                  
+                  <input #csvInput hidden="true" type="file" onclick="this.value=null" (change)="csvInputChange($event)" accept=".pdf"/>
+<button mat-flat-button color="primary" (click)="csvInput.click()">Choose EmployeeID Card (pdf)</button> -->
+
+              <div class="form-group">
+                <input formControlName="file" id="file" type="file" class="form-control" accept=".pdf"
+                  (change)="onFileChange($event)">
+                <div *ngIf="nodalofficer1.get('file').touched && nodalofficer1.get('file').errors?.required"
+                  class="text-danger">
+                  <strong>File is required.</strong>
+                </div>
+              </div>
+
+
+
+
+            </div>
+
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </mat-card-content>
+
+    <mat-card-content class="mat-card-content">
+      <!-- <mat-accordion> -->
+      <mat-accordion multi>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-description class="mat-toolbar">
+              <span class="mat-span">Approving Authority Details</span>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="row">
+            <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-3">
+              <mat-form-field appearance="outline" >
+                <mat-label>Name</mat-label>
+                <mat-select placeholder="--Select--" formControlName="englishname" (selectionChange)="getapprovingdetail($event)">
+                  <mat-option value="{{approvinglist.id}}" *ngFor="let approvinglist of approvingnamelist">{{approvinglist.userName}}</mat-option>
+                </mat-select>
+                <mat-error class="text-danger" *ngIf="
+                        nodalofficer1.get('englishname').touched &&
+                        nodalofficer1.get('englishname').errors?.required
+                      ">
+                  <strong>Required field</strong>
+                </mat-error>
+                <ng-content></ng-content>
+              </mat-form-field>
+
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-3">
+              <mat-form-field appearance="outline">
+                <mat-label>Designation</mat-label>
+                <input matInput type="text" formControlName="approvingdesignation" class="form-control" placeholder=""
+                  autocomplete="off" required />
+                <mat-error class="text-danger" *ngIf="
+                  nodalofficer1.get('approvingdesignation').touched &&
+                  nodalofficer1.get('approvingdesignation').errors?.required
+                ">
+                  <strong>Required field</strong>
+                </mat-error>
+                <mat-error class="text-danger" *ngIf="
+                  nodalofficer1.get('approvingdesignation').touched &&
+                  nodalofficer1.get('approvingdesignation').errors?.pattern
+                ">
+                  <strong>Organization Name Should be Alphabet only</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-3">
+              <mat-form-field appearance="outline">
+                <mat-label>Employee ID</mat-label>
+                <input matInput type="text" formControlName="approvingemployeeid" class="form-control" placeholder=""
+                  autocomplete="off" oninput="this.value = this.value.toUpperCase()" required />
+                <mat-error class="text-danger" *ngIf="
+                  nodalofficer1.get('approvingemployeeid').touched &&
+                  nodalofficer1.get('approvingemployeeid').errors?.required
+                ">
+                  <strong>Required field</strong>
+                </mat-error>
+                <mat-error class="text-danger" *ngIf="
+                  nodalofficer1.get('approvingemployeeid').touched &&
+                  nodalofficer1.get('approvingemployeeid').errors?.pattern
+                ">
+                  <strong>Employee id must be correct</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-3">
+              <mat-form-field appearance="outline">
+                <mat-label> E-mail Address </mat-label>
+                <mat-icon class="light-icon" matPrefix>email</mat-icon>
+                <input matInput placeholder="" formControlName="approvingemail" />
+                <mat-error class="text-danger" *ngIf="
+                  nodalofficer1.get('approvingemail').touched &&
+                  nodalofficer1.get('approvingemail').errors?.required
+                ">
+                  <strong>Required field</strong>
+                </mat-error>
+                <mat-error class="text-danger" *ngIf="
+                  nodalofficer1.get('approvingemail').touched &&
+                  nodalofficer1.get('approvingemail').errors?.pattern
+                ">
+                  <strong>Enter correct email id</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-3">
+              <mat-form-field appearance="outline">
+                <mat-label>Land Line (STDNo + PhoneNo)</mat-label>
+                <mat-icon class="light-icon" matPrefix>phone</mat-icon>
+                <input matInput number maxlength="10" placeholder="Land Line Number with STD Code" inputmode="numeric"
+                  formControlName="phoneno3" />
+                <mat-error class="text-danger" *ngIf="
+                  nodalofficer1.get('phoneno3').touched &&
+                  nodalofficer1.get('phoneno3').errors?.required
+                ">
+                  <strong>Required field</strong>
+                </mat-error>
+                <mat-error class="text-danger" *ngIf="
+                  nodalofficer1.get('phoneno3').touched &&
+                  nodalofficer1.get('phoneno3').errors?.minlength
+                ">
+                  <strong>Phone Number too short
+
+                  </strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-3">
+              <mat-form-field appearance="outline">
+                <mat-label>Mobile Number</mat-label>
+                <mat-icon class="light-icon" matPrefix>phone</mat-icon>
+                <input matInput number maxlength="10" inputmode="numeric" formControlName="phoneno4" />
+                <mat-error class="text-danger" *ngIf="
+                  nodalofficer1.get('phoneno4').touched &&
+                  nodalofficer1.get('phoneno4').errors?.required
+                ">
+                  <strong>Required field</strong>
+                </mat-error>
+                <mat-error class="text-danger" *ngIf="
+                  nodalofficer1.get('phoneno4').touched &&
+                  nodalofficer1.get('phoneno4').errors?.minlength
+                ">
+                  <strong>Mobile Number too short</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            </div>
+            <div class="row">
+              
+              <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                <label for="file">Upload a valid copy of Employee ID </label>
+              </div>
+              <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+  
+                <!--                 
+                    
+                    <input #csvInput hidden="true" type="file" onclick="this.value=null" (change)="csvInputChange($event)" accept=".pdf"/>
+  <button mat-flat-button color="primary" (click)="csvInput.click()">Choose EmployeeID Card (pdf)</button> -->
+  
+                <div class="form-group">
+                  <input formControlName="approvingfile" id="approvingfile" type="file" class="form-control" accept=".pdf"
+                    (change)="onFileChange2($event)">
+                  <div *ngIf="nodalofficer1.get('approvingfile').touched && nodalofficer1.get('approvingfile').errors?.required"
+                    class="text-danger">
+                    <strong>File is required.</strong>
+                  </div>
+                </div>
+  
+  
+  
+  
+              </div>
+  
+            </div>
+
+        </mat-expansion-panel>
+
+
+        <!-- </mat-accordion> -->
+      </mat-accordion>
+    </mat-card-content>
+
+
+    <mat-card-content class="mat-card-content">
+      <!-- <mat-accordion> -->
+      <mat-accordion multi>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-description class="mat-toolbar">
+              <span class="mat-span">Application Details</span>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+              <label>
+                <h4>Nodal officer is being appointed for following CGHS cities ( select one/multiple) </h4>
+              </label>
+            </div>
+            <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-3" >
+                <mat-selection-list #cities (selectionChange)="onSelectionChange()">
+                  <mat-list-option *ngFor="let cghscity of cghscitylist" [value]="cghscity.id">
+                    {{cghscity.cityName}}
+                  </mat-list-option>
+                </mat-selection-list>
+          </div>
+          </div>
+
+
+        
+          <div style="padding:10px"></div>
+          <div class="row">
+            <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-9">
+              <mat-form-field appearance="outline">
+                <mat-label>Total strength of serving staff in above selected cities </mat-label>
+                <input matInput type="text" formControlName="strength" class="form-control"  placeholder=""
+                  autocomplete="off" (keypress)="numberOnly($event)" required />
+                <mat-error class="text-danger" *ngIf="
+                  nodalofficer1.get('strength').touched &&
+                  nodalofficer1.get('strength').errors?.required
+                ">
+                  <strong>Required field</strong>
+                </mat-error>
+                <mat-error class="text-danger" *ngIf="
+                  nodalofficer1.get('strength').touched &&
+                  nodalofficer1.get('strength').errors?.pattern
+                ">
+                  <strong>Number not start with 0</strong>
+                </mat-error>
+              </mat-form-field>
+              
+            </div>
+          </div>
+
+
+
+        </mat-expansion-panel>
+
+
+        <!-- </mat-accordion> -->
+      </mat-accordion>
+    </mat-card-content>
+    <!-- [disabled]="this.nodalofficer1.invalid || !this.checkboxerror" -->
+    <div class="row mt-3 mb-4 px-2">
+      <div class="col-12 text-center px-2">
+        <button type="submit" [disabled]="!this.nodalofficer1.invalid || this.checkboxerror" class="btn btn-primary mr-2">Save As Draft</button>&nbsp;&nbsp;
+        <button type="submit"  class="btn btn-primary mr-2">Save</button>&nbsp;&nbsp;
+        <button type="submit" class="btn btn-secondary">Reset</button>
+      </div>
+    </div>
+
+  </form>
+</mat-card>
+

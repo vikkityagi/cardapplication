@@ -1,0 +1,9 @@
+
+<mat-nav-list>
+    <mat-list-item *ngFor="let data of navData" style="cursor: pointer" routerLink="{{data.nav_link}}" [queryParams]="{ roleId: data.roleId | json}">
+        {{data.nav_name}}
+    </mat-list-item>
+</mat-nav-list>
+
+
+

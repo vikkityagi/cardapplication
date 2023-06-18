@@ -1,0 +1,159 @@
+<form class="my-form" [formGroup]="orgOfficeForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+
+    
+    <mat-card-content class="mat-card-content">
+        <mat-accordion multi>
+
+            <mat-expansion-panel [disabled]="false"  [expanded]="true">
+              <mat-expansion-panel-header>
+                <mat-panel-description class="mat-toolbar">
+                    <span class="mat-span">Add an Organization Office</span>
+                  </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <div class="row">
+              <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-4">
+                <mat-form-field appearance="outline">
+                  <mat-label>Organization Name</mat-label>
+                  <mat-select placeholder="--Select--" formControlName="organizationId"
+                    >
+                    <mat-option value="{{orgOfficeList.organizationId}}">{{orgOfficeList.organization}}</mat-option>
+                  </mat-select>
+                  <mat-error class="text-danger" *ngIf="
+                  orgOfficeForm.get('organizationId').touched &&
+                  orgOfficeForm.get('organizationId').errors?.required">
+                    <strong>Required field</strong>
+                  </mat-error>
+                  <ng-content></ng-content>
+                </mat-form-field>
+              </div>
+              <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-4">
+                <mat-form-field appearance="outline">
+                  <mat-label>Office Name<span style="color: red"></span></mat-label>
+                  <input matInput type="text"  formControlName="officeName" class="form-control" placeholder=""
+                    autocomplete="off"  required  />
+                    <mat-error class="text-danger" *ngIf="
+                    orgOfficeForm.get('officeName').touched &&
+                    orgOfficeForm.get('officeName').errors?.required">
+                        <strong>Required field</strong>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-4">
+                <mat-form-field appearance="outline">
+                  <mat-label>Office Short Name<span style="color: red"></span></mat-label>
+                  <input matInput type="text"  formControlName="officeShortName" class="form-control" placeholder=""
+                    autocomplete="off"  required  />
+                    <mat-error class="text-danger" *ngIf="
+                    orgOfficeForm.get('officeShortName').touched &&
+                    orgOfficeForm.get('officeShortName').errors?.required">
+                        <strong>Required field</strong>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              </div>
+
+
+
+              
+                <!-- <div class="row">
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-6">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Ministry</mat-label>
+                          <mat-select placeholder="--Select--" formControlName="ministry"
+                            (selectionChange)="getdepartment($event.value)">
+                            <mat-option value="{{ministry.ministryCode}}"
+                              *ngFor="let ministry of ministryList">{{ministry.ministryName}}</mat-option>
+                          </mat-select>
+                          <mat-error class="text-danger" *ngIf="
+                                profileForm.get('ministry').touched &&
+                                profileForm.get('ministry').errors?.required">
+                            <strong>Required field</strong>
+                          </mat-error>
+                          <ng-content></ng-content>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-6">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Department</mat-label>
+            
+                          <mat-select placeholder="--Select--" formControlName="department"
+                            (selectionChange)="getorganization($event.value)">
+                            <mat-option value="{{department.departmentCode}}"
+                              *ngFor="let department of departmentList">{{department.departmentName}}</mat-option>
+                          </mat-select>
+            
+                          <mat-error class="text-danger" *ngIf="
+                                profileForm.get('department').touched &&
+                                profileForm.get('department').errors?.required">
+                            <strong>Required field</strong>
+            
+                          </mat-error>
+                          <ng-content></ng-content>
+                        </mat-form-field>
+                      </div>
+            
+                      <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-6">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Organization</mat-label>
+                          <mat-select placeholder="--Select--" formControlName="organization">
+                            <mat-option value={{org.organizationCode}}
+                              *ngFor="let org of orgList">{{org.organizationName}}</mat-option>
+                          </mat-select>
+                          <mat-error class="text-danger" *ngIf="
+                                  profileForm.get('organization').touched &&
+                                  profileForm.get('organization').errors?.required">
+                            <strong>Required field</strong>
+                          </mat-error>
+                          <ng-content></ng-content>
+                        </mat-form-field>
+                      </div>
+                </div> -->
+
+                <div class="row mt-3 mb-4 px-2">
+                    <div class="col-12 text-center px-2">
+                      <button type="submit" mat-btn class="btn btn-primary mr-2">Submit</button>&nbsp;&nbsp;
+                      <button type="reset" mat-btn class="btn btn-primary mr-2">Reset</button>
+                    </div>
+                  </div>
+
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">S. No</th>
+                    <th scope="col">Office ID</th>
+                    <th scope="col">Office Name</th>
+                    <th scope="col">office short name</th>
+                    <th scope="col">Created On</th>
+                    <th scope="col">Updated On</th>
+                    <th scope="col">Is Deleted</th>
+                    <th scope="col">Is Active</th>
+                    <th>Action</th>
+                  </tr>
+                </thead >
+                <tbody *ngFor="let data of loadData,let i=index">
+                  <tr>
+                    <td>{{i+1}}</td>
+                    <td></td>
+                    <td>{{data.officeName}}</td>
+                    <td>{{data.officeShortName}}</td>
+                    <td>{{data.created_on}}</td>
+                    <td>{{data.updated_on}}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                      <!-- <mat-icon style ="cursor: pointer" (click)="editProfile(data.id)">edit</mat-icon> &nbsp;
+                      <mat-icon style ="cursor: pointer" (click)="onDelete(data.id)">delete</mat-icon>  -->
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+          </mat-expansion-panel>
+        </mat-accordion>
+        
+      </mat-card-content>
+    </form>
+
+    

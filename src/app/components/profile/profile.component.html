@@ -1,0 +1,363 @@
+<form
+  class="my-form"
+  [formGroup]="profileForm"
+  (ngSubmit)="onSubmit()"
+  enctype="multipart/form-data"
+>
+  <mat-card-content class="mat-card-content">
+    <mat-accordion multi>
+      <mat-expansion-panel [disabled]="false" [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-description class="mat-toolbar">
+            <span class="mat-span">Update Profile</span>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <div class="row">
+          <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-4">
+            <mat-form-field appearance="outline">
+              <mat-label>User Name</mat-label>
+              <input
+                matInput
+                type="text"
+                formControlName="userName"
+                class="form-control"
+                placeholder=""
+                autocomplete="off"
+                required
+              />
+              <mat-error
+                class="text-danger"
+                *ngIf="
+                  profileForm.get('userName').touched &&
+                  profileForm.get('userName').errors?.required
+                "
+              >
+                <strong>Required field</strong>
+              </mat-error>
+              <mat-error
+                class="text-danger"
+                *ngIf="!profileForm.get('userName').valid"
+              >
+                <strong>{{
+                  profileForm.get("userName").getError("serverError")
+                }}</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-4">
+            <mat-form-field appearance="outline">
+              <mat-label>Designation<span style="color: red"></span></mat-label>
+              <input
+                matInput
+                type="text"
+                formControlName="designation"
+                class="form-control"
+                placeholder=""
+                autocomplete="off"
+                required
+              />
+              <mat-error
+                class="text-danger"
+                *ngIf="
+                  profileForm.get('designation').touched &&
+                  profileForm.get('designation').errors?.required
+                "
+              >
+                <strong>Required field</strong>
+              </mat-error>
+              <mat-error
+                class="text-danger"
+                *ngIf="!profileForm.get('designation').valid"
+              >
+                <strong>{{
+                  profileForm.get("designation").getError("serverError")
+                }}</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-4">
+            <mat-form-field appearance="outline">
+              <mat-label
+                >Employee Code<span style="color: red"></span
+              ></mat-label>
+              <input
+                matInput
+                type="text"
+                formControlName="empCode"
+                class="form-control"
+                placeholder=""
+                autocomplete="off"
+                required
+              />
+              <mat-error
+                class="text-danger"
+                *ngIf="
+                  profileForm.get('empCode').touched &&
+                  profileForm.get('empCode').errors?.required
+                "
+              >
+                <strong>Required field</strong>
+              </mat-error>
+              <mat-error
+                class="text-danger"
+                *ngIf="!profileForm.get('empCode').valid"
+              >
+                <strong>{{ profileForm.get('empCode').getError('serverError') }}</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-4">
+            <mat-form-field appearance="outline">
+              <mat-label>Email</mat-label>
+              <input
+                matInput
+                type="email"
+                formControlName="email"
+                class="form-control"
+                placeholder=""
+                autocomplete="off"
+                required
+              />
+              <mat-error
+                class="text-danger"
+                *ngIf="
+                  profileForm.get('email').touched &&
+                  profileForm.get('email').errors?.required
+                "
+              >
+                <strong>Required field</strong>
+              </mat-error>
+              <mat-error
+                class="text-danger"
+                *ngIf="!profileForm.get('email').valid"
+              >
+                <strong>{{ profileForm.get('email').getError('serverError') }}</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-4">
+            <mat-form-field appearance="outline">
+              <mat-label>Mobile</mat-label>
+              <input
+                matInput
+                type="text"
+                formControlName="mobile"
+                class="form-control"
+                placeholder=""
+                autocomplete="off"
+                required
+              />
+              <mat-error
+                class="text-danger"
+                *ngIf="
+                  profileForm.get('mobile').touched &&
+                  profileForm.get('mobile').errors?.required
+                "
+              >
+                <strong>Required field</strong>
+              </mat-error>
+              <mat-error
+                class="text-danger"
+                *ngIf="!profileForm.get('mobile').valid"
+              >
+                <strong>{{ profileForm.get('mobile').getError('serverError') }}</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Ministry</mat-label>
+              <mat-select
+                placeholder="--Select--"
+                formControlName="ministry"
+                (selectionChange)="getdepartment($event.value)"
+              >
+                <mat-option
+                  value="{{ ministry.ministryCode }}"
+                  *ngFor="let ministry of ministryList"
+                  >{{ ministry.ministryName }}</mat-option
+                >
+              </mat-select>
+              <mat-error
+                class="text-danger"
+                *ngIf="
+                  profileForm.get('ministry').touched &&
+                  profileForm.get('ministry').errors?.required
+                "
+              >
+                <strong>Required field</strong>
+              </mat-error>
+              <ng-content></ng-content>
+            </mat-form-field>
+          </div>
+          <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Department</mat-label>
+
+              <mat-select
+                placeholder="--Select--"
+                formControlName="department"
+                (selectionChange)="getorganization($event.value)"
+              >
+                <mat-option
+                  value="{{ department.departmentCode }}"
+                  *ngFor="let department of departmentList"
+                  >{{ department.departmentName }}</mat-option
+                >
+              </mat-select>
+
+              <mat-error
+                class="text-danger"
+                *ngIf="
+                  profileForm.get('department').touched &&
+                  profileForm.get('department').errors?.required
+                "
+              >
+                <strong>Required field</strong>
+              </mat-error>
+              <ng-content></ng-content>
+            </mat-form-field>
+          </div>
+
+          <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Organization</mat-label>
+              <mat-select
+                placeholder="--Select--"
+                formControlName="organization"
+                (selectionChange)="getOffices($event)"
+              >
+                <mat-option
+                  value="{{ org.organizationCode }}"
+                  *ngFor="let org of orgList"
+                  >{{ org.organizationName }}</mat-option
+                >
+              </mat-select>
+              <mat-error
+                class="text-danger"
+                *ngIf="
+                  profileForm.get('organization').touched &&
+                  profileForm.get('organization').errors?.required
+                "
+              >
+                <strong>Required field</strong>
+              </mat-error>
+              <ng-content></ng-content>
+            </mat-form-field>
+          </div>
+
+          <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Office Name</mat-label>
+              <mat-select
+                placeholder="--Select--"
+                formControlName="organizationOfficeId"
+              >
+                <mat-option
+                  value="{{ office.id }}"
+                  *ngFor="let office of officeList"
+                  >{{ office.officeName }}</mat-option
+                >
+              </mat-select>
+              <mat-error
+                class="text-danger"
+                *ngIf="
+                  profileForm.get('organizationOfficeId').touched &&
+                  profileForm.get('organizationOfficeId').errors?.required
+                "
+              >
+                <strong>Required field</strong>
+              </mat-error>
+              <ng-content></ng-content>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <!-- start -->
+          <mat-radio-group
+            aria-label="Select an option"
+            formControlName="roleId"
+            (change)="radioChange($event)"
+          >
+            <div>Role</div>
+            <mat-radio-button [value]="role.id" *ngFor="let role of roleList" [disabled]="isdisabled">{{
+              role.roleName
+            }}</mat-radio-button>
+          </mat-radio-group>
+        </div>
+
+        <div class="row" *ngIf="showAdCity">
+          <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-6">
+            <mat-form-field appearance="outline">
+              <mat-label> Select CGHS City </mat-label>
+
+              <mat-select
+                placeholder="--Select--"
+                formControlName="adCity"
+                multiple
+              >
+                <mat-option
+                  value="{{ cghscity.id }}"
+                  *ngFor="let cghscity of cghscitylist"
+                  >{{ cghscity.cityName }}</mat-option
+                >
+              </mat-select>
+              <mat-error
+                class="text-danger"
+                *ngIf="
+                  profileForm.get('adCity').touched &&
+                  profileForm.get('adCity').errors?.required
+                "
+              >
+                <strong>Required field</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row mt-3 mb-4 px-2">
+          <div class="col-12 text-center px-2">
+            <button type="submit" mat-btn class="btn btn-primary mr-2">
+              {{buttonValue}}</button
+            >&nbsp;&nbsp;
+            
+            <button type="reset" mat-btn class="btn btn-primary mr-2">
+              Reset
+            </button>
+          </div>
+        </div>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">S. No</th>
+              <th scope="col">Profile Name</th>
+              <th scope="col">Created On</th>
+              <th scope="col">Updated On</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let data of loadData; let i = index">
+            <tr>
+              <td>{{ i + 1 }}</td>
+              <td>{{ data.roleName }}</td>
+              <td>{{ data.createdOn | date : "medium" }}</td>
+              <td>{{ data.updatedOn | date : "medium" }}</td>
+              <td>
+                <mat-icon style ="cursor: pointer" (click)="patchProfile(data.id,data.roleId)">edit</mat-icon>
+                <!--<mat-icon style ="cursor: pointer" (click)="onDelete(data.id)">delete</mat-icon>  -->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-card-content>
+</form>

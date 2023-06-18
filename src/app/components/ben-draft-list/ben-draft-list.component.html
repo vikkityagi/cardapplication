@@ -1,0 +1,30 @@
+<div class="container mt-5" >
+    <div class="card">
+    <div class="card-body">
+  <table class="table table-light">
+      <thead>
+        <tr>
+          <th scope="col">S.No</th>
+          <th scope="col">Application Type</th>
+          <th scope="col">Application No</th>
+          <th scope="col">Created On</th>
+          <th scope="col">Updated On</th>
+          <th scope="col">Status</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let app of draftList;let i = index">
+        <tr>
+          <th scope="row">{{i+1}}</th>
+          <td>{{this.applicationType=='BenRegistration'?'Beneficiary Enrollment Application':''}}</td>
+          <td>{{app.applicationnumber}}</td>
+          <td>{{app.createdon}}</td>
+          <td>{{app.updatedon}}</td>
+          <td>Draft</td>
+          <td><a [routerLink]="['/beneficiaryCard']" [queryParams]="{applicationId: app.id}">Edit </a> | <a href="#">Delete </a></td>
+          
+        </tr>
+      </tbody>
+    </table>
+    </div></div>
+    </div>

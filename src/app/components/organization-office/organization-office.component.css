@@ -1,0 +1,86 @@
+
+.mat-toolbar{
+    height: 41px;
+    justify-content: center;
+    background-color: #001c6b;
+    border-radius: 0.3rem;
+  }
+
+  
+  
+  .mat-span{
+    color: #fff;
+  }
+  
+  
+  .example-right-align {
+    text-align: right;
+  }
+  
+  input.example-right-align::-webkit-outer-spin-button,
+  input.example-right-align::-webkit-inner-spin-button {
+    display: none;
+  }
+  
+  
+  
+  .mat-card-content{
+    margin-bottom: 14px;
+  }
+  
+  
+  
+  
+  .save-proceed{
+    padding: 1rem 1rem;
+      background-color: #0069d9;
+      color: #fff;
+      font-family: robot-medium,sans-serif;
+      font-size: 0.98rem;
+      border-radius: 0.25rem;
+      border: 1px solid transparent;
+      line-height: .9rem;
+      vertical-align: middle;
+      user-select: none;
+  }
+  
+  .back{
+      padding: 1rem 1rem;
+      background-color: #6a7f8a;
+      color: #fff;
+      font-family: robot-medium,sans-serif;
+      font-size: 0.98rem;
+      border-radius: 0.25rem;
+      border: 1px solid transparent;
+      line-height: .9rem;
+      vertical-align: middle;
+      user-select: none;
+  }
+  .light-icon {
+    color: gray;
+  }
+  .text-danger{
+    color:  red  !important;
+  }
+  .form-field{
+    width: 498px;
+  }
+  
+  .form-field1{
+    width: 358px;
+  }
+  
+  .form-field3{
+    width: 96%;
+  }
+  
+  .matListItem{
+    color: blue;
+    font-weight: 600;
+    font-size: 20px;
+  }
+  
+  .mat-mdc-form-field{
+    width:100%;
+  }
+

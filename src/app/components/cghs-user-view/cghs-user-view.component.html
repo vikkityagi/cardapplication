@@ -1,0 +1,66 @@
+
+<div class="container" >
+    <div class="card">
+        <div class="card-body">
+            <div style="color:white;
+            border: 1px solid;
+            width: auto;
+            text-align: center;
+            background-color: #3232b7;
+            height: 32px;">
+                <h2 class="card-title">Cghs User Detail</h2>
+            </div>
+            <div class="row" style="padding-top: 15px" *ngIf="showUser">
+                <div class="table-responsive col-md-6">
+                    <table class="table table-striped">
+                        <thead>
+                        </thead>
+                        <tbody>
+                            <tr>
+                              <th class="col-md-2">EmployeeName</th>
+                              <td class="col-md-1">{{userData.name}}</td>
+                              <th class="col-md-2">Designation</th>
+                              <td class="col-md-1">{{userData.designation}}</td>
+                            </tr>
+                           
+                            <tr>
+                              <th class="col-md-2">Designation</th>
+                              <td class="col-md-1">{{userData.designation}}</td>
+                              <th class="col-md-2">Email Id</th>
+                              <td class="col-md-1">{{userData.email}}</td>
+                            </tr>
+                            
+                            
+                            <tr>
+                              <th class="col-md-2">Mobile Number</th>
+                              <td class="col-md-1">{{userData.mobile}}</td>
+                              <th class="col-md-2">Created On</th>
+                              <td class="col-md-1">{{userData.created_on}}</td>
+                            </tr>
+
+                            
+                          </tbody>
+                          
+                    </table>
+                </div>
+                
+                <div class="row" style="padding-top: 15px;" *ngIf="userData.issigned">
+              <div class="col-md-offset-8">
+                <!-- <img [src]="logo" height="50px" width="50px"/> -->
+                  <p><img  src="../assets/images/esign-tick.png" width="10%" height="10%"></p>
+                 <b>Application is Signed by {{userData.signedby}} on {{userData.signedon}}</b>  
+              </div>
+            </div>
+
+            <form  method="post" *ngIf="!userData.issigned" action= "https://nic-esigngateway.nic.in/eSign21/acceptClient" (ngSubmit)="eSignApplication(userData.id, $event)" [formGroup] = "esignForm">
+              <input type="hidden" formControlName="username" name="username" />
+              <input type="hidden" formControlName="xml" name="xml"/>
+              <input type="hidden" formControlName="clientrequestURL" name="clientrequestURL"/>
+              <button style="float:right" class="btn btn-primary"  *ngIf="!userData.issigned">eSign and Submit </button>
+            </form>
+              <!-- <button style="float:right" class="btn btn-primary" (click)="printThisPage()">Print This Page</button> -->
+            </div>
+        </div>
+    
+   </div>
+  

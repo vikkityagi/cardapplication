@@ -1,0 +1,59 @@
+<div class="container mt-5" >
+  <div class="card">
+  <div class="card-body">
+  <table class="table table-light" *ngIf="showTaskList">
+    <thead>
+      <tr>
+        <th scope="col">S.No</th>
+        <!-- <th scope="col">Id</th>
+        <th scope="col">Application Id</th> -->
+        <th scope="col">Application Number</th>
+        <!-- <th scope="col">Action type</th> -->
+        <th scope="col">Action Name</th>
+        <th scope="col">From user </th>
+        <th scope="col">To user </th>
+        <th scope="col">Date</th>
+        <th scope="col">Status</th>
+        <!-- <th scope="col">Action</th> -->
+      </tr>
+    </thead>
+    <tbody *ngFor="let tasklist of dataSource;let i = index">
+      <tr>
+        <td scope="row">{{i+1}}</td>
+        <!-- <td scope="row">{{tasklist.id}}</td> -->
+        <!-- <td>{{tasklist.application}}</td> -->
+        <td>{{tasklist.applicationNumber}}</td>
+        <!-- <td>{{tasklist.actionType}}</td> -->
+        <td>{{tasklist.actionName}}</td>
+        <td>{{fromOfficeData.organizationName}}</td>
+        <td>{{toOfficeData.organizationName}}</td>
+        <td>{{tasklist.createdOn|date:'medium'}} 
+        <td>{{tasklist.levelNo}}</td>
+        <td>
+          <a (click)="forward(tasklist.id)" style="cursor: pointer;"><mat-icon>forward</mat-icon></a>
+          <!-- <button (click)="toggleForm1()">Approve</button> -->
+          <!-- <button (click)="toggleForm2()">Reject</button> -->
+          <!-- <mat-accordion>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Form Title
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <form>
+                
+              </form>
+            </mat-expansion-panel>
+          </mat-accordion> -->
+        </td>
+        <td>
+          <a routerLink="/applicationView/{{tasklist.application}}" [queryParams]="{ applicationType: tasklist.applicationType | json}">view</a>
+        </td>
+        
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  </div>
+  
+  </div>
